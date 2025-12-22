@@ -27,6 +27,11 @@ public class SecurityConfig {
             throws Exception {
 
         http
+                .cors(cors -> cors.configurationSource(
+                        http.getSharedObject(
+                                org.springframework.web.cors.CorsConfigurationSource.class
+                        )
+                ))
                 .csrf(csrf -> csrf.disable())
                 .sessionManagement(session ->
                         session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
