@@ -6,6 +6,7 @@ import com.skillsharing.auth.security.JwtUtil;
 import com.skillsharing.auth.service.AuthService;
 import com.skillsharing.user.dto.UserResponse;
 import com.skillsharing.user.entity.UserEntity;
+import com.skillsharing.user.entity.UserStatus;
 import com.skillsharing.user.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
@@ -36,7 +37,10 @@ public class AuthServiceImpl implements AuthService {
                 .orElseThrow(() -> new IllegalArgumentException("Invalid credentials"));
 
         if (!passwordEncoder.matches(request.getPassword(), user.getPassword())) {
-            throw new IllegalArgumentException("Invalid credentials");
+            throw new IllegalArgumentException("Invalid credentials / Wrong username or password");
+        }
+        if (user.getStatus() != UserStatus.ACTIVE) {
+            throw new IllegalArgumentException("Account is inactive");
         }
 
         String token = jwtUtil.generateToken(user.getEmail());

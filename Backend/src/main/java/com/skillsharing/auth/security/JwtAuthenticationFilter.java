@@ -70,6 +70,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                         .setAuthentication(authToken);
             }
 
+            System.out.println("JWT FILTER HIT: " + request.getMethod() + " " + request.getRequestURI());
 
         }
 

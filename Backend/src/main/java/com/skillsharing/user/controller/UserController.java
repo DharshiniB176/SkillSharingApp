@@ -1,15 +1,18 @@
 package com.skillsharing.user.controller;
 
 import com.skillsharing.auth.security.CustomUserDetails;
-import com.skillsharing.user.dto.CurrentUserResponse;
-import com.skillsharing.user.dto.RegisterRequest;
-import com.skillsharing.user.dto.UserResponse;
+import com.skillsharing.user.dto.*;
+import com.skillsharing.user.dto.ReactivateRequest;
+import com.skillsharing.user.entity.UpdatePassword;
+import com.skillsharing.user.entity.UpdateUserName;
 import com.skillsharing.user.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Map;
 
 @RestController
 @RequestMapping("/users")
@@ -42,4 +45,52 @@ public class UserController {
                 userDetails.getUser().getRole().name()
         );
     }
+
+    @PutMapping("/me")
+    public ResponseEntity<UserResponse> updateMe(
+            @Valid @RequestBody UpdateUserName request,
+            Authentication authentication) {
+
+        String email = authentication.getName();
+        UserResponse response = userService.updateCurrentUser(email, request);
+
+        return ResponseEntity.ok(response);
+    }
+
+    @PutMapping("/me/password")
+    public ResponseEntity<?> changePassword(
+            @Valid @RequestBody UpdatePassword request,
+            Authentication authentication) {
+
+        String email = authentication.getName();
+        userService.changePassword(email, request);
+
+        return ResponseEntity.ok(
+                Map.of("message", "Password updated successfully")
+        );
+    }
+
+
+    @DeleteMapping("/me")
+    public ResponseEntity<?> deactivateMe(Authentication authentication) {
+
+        String email = authentication.getName();
+        userService.deactivateCurrentUser(email);
+
+        return ResponseEntity.ok(
+                Map.of("message", "Account deactivated successfully")
+        );
+    }
+
+    @PostMapping("/reactivate")
+    public ResponseEntity<?> reactivate(
+            @Valid @RequestBody ReactivateRequest request) {
+
+        userService.reactivateAccount(request);
+
+        return ResponseEntity.ok(
+                Map.of("message", "Account reactivated successfully")
+        );
+    }
+
 }
