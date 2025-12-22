@@ -1,7 +1,8 @@
 package com.skillsharing.user.service;
 
 
-import com.skillsharing.user.dto.ReactivateRequest;
+
+import com.skillsharing.user.dto.CurrentUserResponse;
 import com.skillsharing.user.dto.RegisterRequest;
 import com.skillsharing.user.dto.UserResponse;
 import com.skillsharing.user.entity.UpdatePassword;
@@ -17,7 +18,7 @@ public interface UserService {
 
     void deactivateCurrentUser(String email);
 
-    void reactivateAccount(ReactivateRequest request);
+    void reactivateAccount(CurrentUserResponse.ReactivateRequest request);
 
 
 

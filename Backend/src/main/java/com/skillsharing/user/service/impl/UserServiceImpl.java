@@ -1,7 +1,7 @@
 package com.skillsharing.user.service.impl;
 
 import com.skillsharing.auth.service.AuthService;
-import com.skillsharing.user.dto.ReactivateRequest;
+import com.skillsharing.user.dto.CurrentUserResponse;
 import com.skillsharing.user.dto.RegisterRequest;
 import com.skillsharing.user.dto.UserResponse;
 import com.skillsharing.user.entity.*;
@@ -99,7 +99,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void reactivateAccount(ReactivateRequest request) {
+    public void reactivateAccount(CurrentUserResponse.ReactivateRequest request) {
 
         UserEntity user = userRepository.findByEmail(request.getEmail())
                 .orElseThrow(() -> new IllegalArgumentException("User not found"));

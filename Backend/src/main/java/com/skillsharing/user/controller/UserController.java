@@ -2,7 +2,6 @@ package com.skillsharing.user.controller;
 
 import com.skillsharing.auth.security.CustomUserDetails;
 import com.skillsharing.user.dto.*;
-import com.skillsharing.user.dto.ReactivateRequest;
 import com.skillsharing.user.entity.UpdatePassword;
 import com.skillsharing.user.entity.UpdateUserName;
 import com.skillsharing.user.service.UserService;
@@ -84,7 +83,7 @@ public class UserController {
 
     @PostMapping("/reactivate")
     public ResponseEntity<?> reactivate(
-            @Valid @RequestBody ReactivateRequest request) {
+            @Valid @RequestBody CurrentUserResponse.ReactivateRequest request) {
 
         userService.reactivateAccount(request);
 
