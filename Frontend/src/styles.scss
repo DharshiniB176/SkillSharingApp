@@ -1,1 +1,55 @@
 /* You can add global styles to this file, and also import other style files */
+@use "tailwindcss";
+
+:root {
+
+  --primary: #4f46e5;      
+  --primary-hover: #4338ca;
+
+
+  --bg-main: #f9fafb;
+  --bg-card: #ffffff;
+  --bg-input: #ffffff;
+
+
+  --text-main: #111827;
+  --text-muted: #6b7280;
+  --text-inverse: #ffffff;
+
+
+  --border-color: #e5e7eb;
+
+
+  --success: #16a34a;
+  --error: #dc2626;
+  --warning: #f59e0b;
+}
+
+.dark {
+  --primary: #6366f1;
+  --primary-hover: #818cf8;
+
+  --bg-main: #111827;
+  --bg-card: #1f2933;
+  --bg-input: #1f2933;
+
+  --text-main: #f3f4f6;
+  --text-muted: #9ca3af;
+  --text-inverse: #111827;
+
+  --border-color: #374151;
+}
+
+
+/* PrimeNG overrides */
+:root {
+  --primary-color: var(--primary);
+  --primary-color-text: var(--text-inverse);
+
+  --surface-ground: var(--bg-main);
+  --surface-card: var(--bg-card);
+  --surface-border: var(--border-color);
+
+  --text-color: var(--text-main);
+  --text-color-secondary: var(--text-muted);
+}

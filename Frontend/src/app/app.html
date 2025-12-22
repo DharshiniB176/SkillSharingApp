@@ -1,1 +1,11 @@
 <router-outlet></router-outlet>
+
+
+
+  <button
+    (click)="theme.toggleTheme()"
+    class="mt-4 px-4 py-2 border border-border"
+  >
+    {{ theme.isDarkMode() ? '🌙 Dark' : '🌞 Light' }}
+  </button>
+
