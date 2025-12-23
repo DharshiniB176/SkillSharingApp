@@ -1,10 +1,11 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, signal } from '@angular/core';
+import { Component, EventEmitter, inject, Output, signal } from '@angular/core';
 import { FormBuilder, Validators, ReactiveFormsModule, AbstractControl } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { PasswordModule } from 'primeng/password';
 import { of, delay, map } from 'rxjs';
+import { AuthService } from '../../core/services/auth-service';
 
 @Component({
   standalone: true,
@@ -23,6 +24,8 @@ export class RegisterComponent {
 
   private fb = inject(FormBuilder);
 
+
+  constructor(private auth:AuthService){}
 
   shakeName = signal(false);
 shakeEmail = signal(false);
@@ -76,12 +79,30 @@ private shake(signalRef: any) {
     );
   }
 
+  @Output() registered = new EventEmitter<void>();
+
   submit() {
     if (this.registerForm.invalid) {
       this.registerForm.markAllAsTouched();
       return;
     }
 
-    console.log(this.registerForm.value);
+    const payload = {
+      fullName: this.registerForm.controls.fullName.value!,
+      email: this.registerForm.controls.email.value!,
+      phoneNumber: this.registerForm.controls.phoneNumber.value!,
+      password: this.registerForm.controls.password.value!
+    };
+
+    this.auth.register(payload).subscribe({
+      next: () => {
+        this.registered.emit();
+      },
+      error: (err) => {
+        if (err.status === 409) {
+          this.registerForm.controls.email.setErrors({ emailExists: true });
+        }
+      }
+    });
   }
 }

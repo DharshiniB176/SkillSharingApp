@@ -73,7 +73,7 @@
            text-[var(--text-inverse)]
            font-medium transition
            hover:scale-[1.02] active:scale-[0.98]
-           shadow-lg" [disabled]="loginForm.invalid">
+           shadow-lg" []="loginForm.invalid">
     Login
   </button>
 
@@ -89,33 +89,30 @@
 
   <button
     type="button"
-    disabled
+    
     class="w-14 h-14 flex items-center justify-center
            border border-[var(--border-color)]
            rounded-full
-           opacity-60 cursor-not-allowed
            transition hover:scale-105">
     <img src="assets/icons/google.png" class="w-6 h-6" />
   </button>
 
   <button
     type="button"
-    disabled
+    
     class="w-14 h-14 flex items-center justify-center
            border border-[var(--border-color)]
            rounded-full
-           opacity-60 cursor-not-allowed
            transition hover:scale-105">
     <img src="assets/icons/facebook.png" class="w-6 h-6" />
   </button>
 
   <button
     type="button"
-    disabled
+    
     class="w-14 h-14 flex items-center justify-center
            border border-[var(--border-color)]
            rounded-full
-           opacity-60 cursor-not-allowed
            transition hover:scale-105">
     <img src="assets/icons/linkedin.png" class="w-6 h-6" />
   </button>

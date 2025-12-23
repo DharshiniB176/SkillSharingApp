@@ -34,7 +34,8 @@
 
       <div class="w-1/2 grid grid-cols-1 md:grid-cols-2">
         <div class="p-8 sm:p-10 order-2 md:order-1">
-          <app-register></app-register>
+          <app-register (registered)="showLogin()"></app-register>
+
           <p class="text-sm text-center text-[var(--text-muted)] mt-6">
             Already registered?
             <span class="text-[var(--primary)] cursor-pointer hover:underline"
