@@ -21,7 +21,11 @@ public class UserEntity {
         @Column(nullable = false, length = 100)
         private String fullName;
 
-        @Enumerated(EnumType.STRING)
+    @Column(nullable = false, unique = true, length = 10)
+    private String phoneNumber;
+
+
+    @Enumerated(EnumType.STRING)
         @Column(nullable = false)
         private UserRole role;
 
@@ -76,5 +80,14 @@ public class UserEntity {
     public void setStatus(UserStatus status) {
         this.status = status;
     }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
 }
 

@@ -32,8 +32,13 @@ public class UserServiceImpl implements UserService {
             throw new IllegalArgumentException("Email already registered");
         }
 
+        if (userRepository.existsByPhoneNumber(request.getPhoneNumber())) {
+            throw new IllegalArgumentException("Phone number already registered");
+        }
+
         UserEntity user = new UserEntity();
         user.setEmail(request.getEmail());
+        user.setPhoneNumber(request.getPhoneNumber());
         user.setPassword(authService.encodePassword(request.getPassword()));
         user.setFullName(request.getFullName());
         user.setRole(UserRole.USER);

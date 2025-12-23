@@ -2,6 +2,7 @@ package com.skillsharing.user.dto;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 public class RegisterRequest {
 
@@ -15,6 +16,18 @@ public class RegisterRequest {
 
         @NotBlank
         private String fullName;
+
+        @NotBlank
+        @Pattern(regexp = "^[0-9]{10}$", message = "Phone number must be 10 digits")
+        private String phoneNumber;
+
+        public @NotBlank @Pattern(regexp = "^[0-9]{10}$", message = "Phone number must be 10 digits") String getPhoneNumber() {
+                return phoneNumber;
+        }
+
+        public void setPhoneNumber(@NotBlank @Pattern(regexp = "^[0-9]{10}$", message = "Phone number must be 10 digits") String phoneNumber) {
+                this.phoneNumber = phoneNumber;
+        }
 
         public @NotBlank @Email String getEmail() {
                 return email;
