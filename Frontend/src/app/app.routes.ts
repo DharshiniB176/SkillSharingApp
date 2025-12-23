@@ -1,6 +1,10 @@
 import { Routes } from '@angular/router';
-import { Login } from './features/users/login/login';
+import { Landing } from './components/landing/landing';
+import { AuthContainer } from './auth/auth-container/auth-container';
+import { Dashboard } from './components/dashboard/dashboard';
 
 export const routes: Routes = [
-    {path: 'login', component: Login}
+  { path: '', component: Landing },
+  { path: 'auth', component: AuthContainer },
+  { path: 'dashboard', component: Dashboard }
 ];

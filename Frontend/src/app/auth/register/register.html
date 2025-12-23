@@ -1,0 +1,162 @@
+<h2 class="text-2xl font-semibold text-[var(--text-main)] mb-1">
+  Create account 🚀
+</h2>
+
+<p class="text-sm text-[var(--text-muted)] mb-6">
+  Start your journey with SkillSharing
+</p>
+
+<form [formGroup]="registerForm" (ngSubmit)="submit()" class="space-y-5">
+
+  <div class="space-y-4">
+
+    <div
+      [class.animate-shake]="shakeName()"
+      class="transition">
+
+      <label class="block text-sm text-[var(--text-muted)] mb-1">
+        Full Name
+      </label>
+
+      <input
+        pInputText
+        formControlName="fullName"
+        placeholder="Enter Your Name"
+        (blur)="onNameBlur()"
+        class="w-full h-11
+               bg-[var(--bg-input)]
+               text-[var(--text-main)]
+               border rounded-lg px-4
+               focus:ring-2 focus:ring-[var(--primary)]
+               focus:outline-none"
+        [class.border-[var(--error)]]="f.fullName.touched && f.fullName.invalid"
+        [class.border-[var(--border-color)]]="!f.fullName.touched || f.fullName.valid" />
+
+      @if (f.fullName.touched && f.fullName.invalid) {
+        <p class="text-xs text-[var(--error)] mt-1">
+          Full name is required
+        </p>
+      }
+
+    </div>
+
+    <div
+      [class.animate-shake]="shakeEmail()"
+      class="transition">
+
+      <label class="block text-sm text-[var(--text-muted)] mb-1">
+        Email
+      </label>
+
+      <input
+        pInputText
+        type="email"
+        formControlName="email"
+        placeholder="Enter Your Email"
+        (blur)="onEmailBlur()"
+        class="w-full h-11
+               bg-[var(--bg-input)]
+               text-[var(--text-main)]
+               border rounded-lg px-4
+               focus:ring-2 focus:ring-[var(--primary)]
+               focus:outline-none"
+        [class.border-[var(--error)]]="f.email.touched && f.email.invalid"
+        [class.border-[var(--border-color)]]="!f.email.touched || f.email.valid" />
+
+      @if (f.email.touched && f.email.errors?.['email']) {
+        <p class="text-xs text-[var(--error)] mt-1">
+          Enter a valid email address
+        </p>
+      }
+
+      @if (f.email.touched && f.email.errors?.['emailExists']) {
+        <p class="text-xs text-[var(--error)] mt-1">
+          Email already registered
+        </p>
+      }
+
+    </div>
+
+    <div
+      [class.animate-shake]="shakePhone()"
+      class="transition">
+
+      <label class="block text-sm text-[var(--text-muted)] mb-1">
+        Phone Number
+      </label>
+
+      <input
+        pInputText
+        type="tel"
+        formControlName="phoneNumber"
+        placeholder="Enter Your Phone Number"
+        (blur)="onPhoneBlur()"
+        class="w-full h-11
+               bg-[var(--bg-input)]
+               text-[var(--text-main)]
+               border rounded-lg px-4
+               focus:ring-2 focus:ring-[var(--primary)]
+               focus:outline-none"
+        [class.border-[var(--error)]]="f.phoneNumber.touched && f.phoneNumber.invalid"
+        [class.border-[var(--border-color)]]="!f.phoneNumber.touched || f.phoneNumber.valid" />
+
+      @if (f.phoneNumber.touched && f.phoneNumber.invalid) {
+        <p class="text-xs text-[var(--error)] mt-1">
+          Enter a valid 10-digit phone number
+        </p>
+      }
+
+    </div>
+
+    <div
+      [class.animate-shake]="shakePassword()"
+      class="transition w-full">
+
+      <label class="block text-sm text-[var(--text-muted)] mb-1">
+        Password
+      </label>
+
+      <p-password
+      [toggleMask]="true"
+        formControlName="password"
+        [feedback]="false"
+        placeholder="Enter Your Password"
+        (onBlur)="onPasswordBlur()"
+        styleClass="w-full"
+        inputStyleClass="
+          w-full h-11
+          bg-[var(--bg-input)]
+          text-[var(--text-main)]
+          border rounded-lg px-4
+          focus:ring-2 focus:ring-[var(--primary)]
+          focus:outline-none"
+        [inputStyleClass]="
+          (f.password.touched && f.password.invalid)
+            ? 'w-full h-11 bg-[var(--bg-input)] text-[var(--text-main)] border border-[var(--error)] rounded-lg px-4 focus:ring-2 focus:ring-[var(--primary)] focus:outline-none'
+            : 'w-full h-11 bg-[var(--bg-input)] text-[var(--text-main)] border border-[var(--border-color)] rounded-lg px-4 focus:ring-2 focus:ring-[var(--primary)] focus:outline-none'
+        ">
+      </p-password>
+
+      @if (f.password.touched && f.password.invalid) {
+        <p class="text-xs text-[var(--error)] mt-1">
+          Minimum 8 characters, 1 uppercase & 1 special character
+        </p>
+      }
+
+    </div>
+
+  </div>
+
+  <button
+    type="submit"
+    class="w-full py-3 rounded-lg
+           bg-[var(--primary)]
+           text-[var(--text-inverse)]
+           font-medium transition
+           hover:scale-[1.02] active:scale-[0.98]
+           shadow-lg"
+    [disabled]="registerForm.invalid">
+    Register
+  </button>
+
+</form>

@@ -1,1 +1,10 @@
-
+*{
+    padding: 0%;
+    margin: 0%;
+    box-sizing: border-box;
+}
+.p-inputtext,
+.p-password-input {
+  background-color: var(--bg-input) !important;
+  color: var(--text-main) !important;
+}

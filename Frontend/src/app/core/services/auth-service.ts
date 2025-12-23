@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, tap } from 'rxjs';
-import { User } from '../../shared/models/user-model';
+import { User } from '../../models/user-model';
 
 interface LoginRequest {
   email: string;
@@ -19,7 +19,7 @@ interface AuthResponse {
 export class AuthService {
 
   private readonly API_URL = 'http://localhost:8080';
-  private token: string | null = null;
+  private readonly TOKEN_KEY = 'auth_token';
 
   constructor(private http: HttpClient) {}
 
@@ -28,21 +28,20 @@ export class AuthService {
       .post<AuthResponse>(`${this.API_URL}/sessions`, request)
       .pipe(
         tap(response => {
-          this.token = response.accessToken;
-          console.log('JWT stored in memory:', this.token);
+          localStorage.setItem(this.TOKEN_KEY, response.accessToken);
         })
       );
   }
 
   getToken(): string | null {
-    return this.token;
-  }
-
-  logout(): void {
-    this.token = null;
+    return localStorage.getItem(this.TOKEN_KEY);
   }
 
   isLoggedIn(): boolean {
-    return !!this.token;
+    return !!this.getToken();
+  }
+
+  logout(): void {
+    localStorage.removeItem(this.TOKEN_KEY);
   }
 }
