@@ -20,9 +20,10 @@ export class AuthService {
   private readonly TOKEN_KEY = 'auth_token';
   private readonly USER_KEY = 'auth_user';
 
+
   user = signal<User | null>(this.loadUser());
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   login(request: LoginRequest) {
     return this.http.post<AuthResponse>(`${this.API_URL}/sessions`, request).pipe(
@@ -48,18 +49,23 @@ export class AuthService {
     return localStorage.getItem(this.TOKEN_KEY);
   }
 
+  storeToken(token: string) {
+    localStorage.setItem(this.TOKEN_KEY, token);
+  }
+
+
   private loadUser(): User | null {
     const raw = localStorage.getItem(this.USER_KEY);
     return raw ? JSON.parse(raw) : null;
   }
 
   register(payload: {
-  fullName: string;
-  email: string;
-  phoneNumber: string;
-  password: string;
-}) {
-  return this.http.post(`${this.API_URL}/users`, payload);
-}
+    fullName: string;
+    email: string;
+    phoneNumber: string;
+    password: string;
+  }) {
+    return this.http.post(`${this.API_URL}/users`, payload);
+  }
 
 }
