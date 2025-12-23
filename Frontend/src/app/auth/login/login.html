@@ -89,32 +89,36 @@
 
   <button
     type="button"
-    
     class="w-14 h-14 flex items-center justify-center
+           bg-[var(--bg-input)]
            border border-[var(--border-color)]
-           rounded-full
-           transition hover:scale-105">
+           rounded-xl
+           transition hover:scale-105"
+    (click)="loginWithGoogle()">
     <img src="assets/icons/google.png" class="w-6 h-6" />
   </button>
 
   <button
     type="button"
-    
     class="w-14 h-14 flex items-center justify-center
+           bg-[var(--bg-input)]
            border border-[var(--border-color)]
-           rounded-full
-           transition hover:scale-105">
+           rounded-xl
+           transition hover:scale-105"
+    (click)="loginWithFacebook()">
     <img src="assets/icons/facebook.png" class="w-6 h-6" />
   </button>
 
   <button
     type="button"
-    
     class="w-14 h-14 flex items-center justify-center
+           bg-[var(--bg-input)]
            border border-[var(--border-color)]
-           rounded-full
-           transition hover:scale-105">
+           rounded-xl
+           transition hover:scale-105"
+    (click)="loginWithLinkedIn()">
     <img src="assets/icons/linkedin.png" class="w-6 h-6" />
   </button>
 
 </div>
+
