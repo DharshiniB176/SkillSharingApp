@@ -81,4 +81,17 @@ export class AuthService {
     return this.http.post(`${this.API_URL}/users`, payload);
   }
 
+  updateProfile(payload: { fullName: string; phoneNumber: string }) {
+  return this.http.put<User>(`${this.API_URL}/users/me`, payload)
+    .pipe(tap(user => {
+      localStorage.setItem('auth_user', JSON.stringify(user));
+      this.user.set(user);
+    }));
+}
+
+changePassword(payload: { currentPassword: string; newPassword: string }) {
+  return this.http.put(`${this.API_URL}/users/me/password`, payload);
+}
+
+
 }

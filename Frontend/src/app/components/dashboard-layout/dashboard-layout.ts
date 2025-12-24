@@ -16,21 +16,12 @@ export class DashboardLayout implements OnInit{
   ngOnInit() {
     this.syncWithScreen();
   }
-
-  @HostListener('window:resize')
-  syncWithScreen() {
-    if (window.innerWidth < 768) {
-      this.sidebarOpen.set(false);
-      this.miniMode.set(false);
-    } else {
-      this.sidebarOpen.set(true);
-    }
-  }
-
-  toggleSidebar() {
-  if (this.sidebarOpen()) {
+@HostListener('window:resize')
+syncWithScreen() {
+  if (window.innerWidth < 768) {
     this.sidebarOpen.set(false);
     this.miniMode.set(false);
+    document.body.classList.remove('overflow-hidden');
   } else {
     this.sidebarOpen.set(true);
   }
@@ -39,6 +30,16 @@ export class DashboardLayout implements OnInit{
 closeSidebar() {
   this.sidebarOpen.set(false);
   this.miniMode.set(false);
+  document.body.classList.remove('overflow-hidden');
+}
+
+toggleSidebar() {
+  if (this.sidebarOpen()) {
+    this.closeSidebar();
+  } else {
+    this.sidebarOpen.set(true);
+    document.body.classList.add('overflow-hidden');
+  }
 }
 
 toggleMiniMode() {

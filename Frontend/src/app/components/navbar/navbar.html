@@ -34,6 +34,12 @@
 
 
   <div class="ml-auto flex items-center gap-4">
+      <button
+    (click)="theme.toggleTheme()"
+    class="mt-4 px-4 py-2 border border-border"
+  >
+    {{ theme.isDarkMode() ? '🌙 Dark' : '🌞 Light' }}
+  </button>
     <span class="hidden sm:block text-sm text-[var(--text-muted)]">
       {{ auth.user()?.fullName }}
     </span>

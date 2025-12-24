@@ -1,24 +1,50 @@
 import { HttpInterceptorFn } from '@angular/common/http';
 import { inject } from '@angular/core';
 import { AuthService } from '../services/auth-service';
+import { Router } from '@angular/router';
+import { catchError, throwError } from 'rxjs';
+
+// export const authInterceptor: HttpInterceptorFn = (req, next) => {
+
+//   console.log(req.url);
+  
+//   const auth = inject(AuthService);
+//   const token = auth.getToken();
+
+//   if (!token) {
+//     return next(req);
+//   }
+
+//   const authReq = req.clone({
+//     setHeaders: {
+//       Authorization: `Bearer ${token}`     
+//     }
+//   });
+
+  
+//   return next(authReq);
+// };
+
 
 export const authInterceptor: HttpInterceptorFn = (req, next) => {
-
-  console.log(req.url);
-  
   const auth = inject(AuthService);
+  const router = inject(Router);
+
   const token = auth.getToken();
 
-  if (!token) {
-    return next(req);
-  }
+  const authReq = token
+    ? req.clone({
+        setHeaders: { Authorization: `Bearer ${token}` }
+      })
+    : req;
 
-  const authReq = req.clone({
-    setHeaders: {
-      Authorization: `Bearer ${token}`     
-    }
-  });
-
-  
-  return next(authReq);
+  return next(authReq).pipe(
+    catchError(err => {
+      if (err.status === 401) {
+        auth.logout();
+        router.navigateByUrl('/auth');
+      }
+      return throwError(() => err);
+    })
+  );
 };

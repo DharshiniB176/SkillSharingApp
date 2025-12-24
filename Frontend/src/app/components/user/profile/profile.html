@@ -1,0 +1,99 @@
+<div class="max-w-3xl space-y-8">
+
+  <div>
+    <h2 class="text-xl font-semibold text-[var(--text-main)]">
+      Profile Settings
+    </h2>
+    <p class="text-sm text-[var(--text-muted)]">
+      Manage your personal information
+    </p>
+  </div>
+
+  <div class="bg-[var(--bg-card)] border border-[var(--border-color)]
+              rounded-xl p-6 space-y-5">
+
+    <h3 class="font-medium">Profile Info</h3>
+
+    <form [formGroup]="profileForm" class="space-y-4">
+
+      <div>
+        <label class="text-sm text-[var(--text-muted)]">Full Name</label>
+        <input pInputText formControlName="fullName"
+               class="w-full h-11 bg-[var(--bg-input)]
+                      border border-[var(--border-color)]
+                      rounded-lg px-4" />
+      </div>
+
+      <div>
+        <label class="text-sm text-[var(--text-muted)]">Email</label>
+        <input pInputText
+               [value]="auth.user()?.email"
+               disabled
+               class="w-full h-11 bg-[var(--bg-input)]
+                      border border-[var(--border-color)]
+                      rounded-lg px-4 opacity-70" />
+      </div>
+
+      <div>
+        <label class="text-sm text-[var(--text-muted)]">Phone Number</label>
+        <input pInputText formControlName="phoneNumber"
+               class="w-full h-11 bg-[var(--bg-input)]
+                      border border-[var(--border-color)]
+                      rounded-lg px-4" />
+      </div>
+
+      <button
+        class="px-6 py-2 rounded-lg
+               bg-[var(--primary)]
+               text-[var(--text-inverse)]
+               disabled:opacity-50"
+        [disabled]="profileForm.invalid || profileForm.pristine || saving()"
+        (click)="updateProfile()">
+        Save Changes
+      </button>
+
+    </form>
+  </div>
+
+  <div class="bg-[var(--bg-card)] border border-[var(--border-color)]
+              rounded-xl p-6 space-y-5">
+
+    <h3 class="font-medium">Change Password</h3>
+
+    <form [formGroup]="passwordForm" class="space-y-4">
+
+      <div>
+        <label class="text-sm text-[var(--text-muted)]">Current Password</label>
+        <p-password formControlName="currentPassword"
+                    [feedback]="false"
+                    styleClass="w-full"
+                    inputStyleClass="w-full h-11 bg-[var(--bg-input)]
+                                     border border-[var(--border-color)]
+                                     rounded-lg px-4">
+        </p-password>
+      </div>
+
+      <div>
+        <label class="text-sm text-[var(--text-muted)]">New Password</label>
+        <p-password formControlName="newPassword"
+                    [feedback]="false"
+                    styleClass="w-full"
+                    inputStyleClass="w-full h-11 bg-[var(--bg-input)]
+                                     border border-[var(--border-color)]
+                                     rounded-lg px-4">
+        </p-password>
+      </div>
+
+      <button
+        class="px-6 py-2 rounded-lg
+               bg-[var(--error)]
+               text-white disabled:opacity-50"
+        [disabled]="passwordForm.invalid || passwordSaving()"
+        (click)="changePassword()">
+        Update Password
+      </button>
+
+    </form>
+  </div>
+
+</div>

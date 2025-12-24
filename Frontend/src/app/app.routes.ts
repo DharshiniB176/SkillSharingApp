@@ -20,6 +20,12 @@ export const routes: Routes = [
     }
   ]
 },
+{
+  path: 'profile',
+  loadComponent: () =>
+    import('./components/user/profile/profile').then(m => m.Profile)
+},
+
 
    { path: 'oauth-success', component: OauthSuccess },
    {path: 'sidebar',component: Sidebar}

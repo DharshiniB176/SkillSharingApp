@@ -1,6 +1,8 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
 import { AuthService } from '../../core/services/auth-service';
 import { Router } from '@angular/router';
+import { Theme } from '@primeuix/themes/types';
+import { ThemeService } from '../../core/services/theme-service';
 
 @Component({
   selector: 'app-navbar',
@@ -11,11 +13,12 @@ import { Router } from '@angular/router';
 export class Navbar {
 
  @Input() sidebarOpen = false;
-  @Output() menuToggle = new EventEmitter<void>();
+ @Output() menuToggle = new EventEmitter<void>();
 
   constructor(
     public auth: AuthService,
-    private router: Router
+    private router: Router,
+    public theme: ThemeService
   ) {}
 
   logout() {

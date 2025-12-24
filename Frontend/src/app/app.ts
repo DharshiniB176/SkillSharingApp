@@ -12,5 +12,4 @@ import { ThemeService } from './core/services/theme-service';
 export class App {
   protected readonly title = signal('skillshare');
 
-  constructor(public theme: ThemeService){}
 }
