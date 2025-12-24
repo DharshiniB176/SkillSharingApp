@@ -2,8 +2,6 @@ package com.skillsharing.user.controller;
 
 import com.skillsharing.auth.security.CustomUserDetails;
 import com.skillsharing.user.dto.*;
-import com.skillsharing.user.entity.UpdatePassword;
-import com.skillsharing.user.entity.UpdateUserName;
 import com.skillsharing.user.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
@@ -45,9 +43,10 @@ public class UserController {
         );
     }
 
+
     @PutMapping("/me")
     public ResponseEntity<UserResponse> updateMe(
-            @Valid @RequestBody UpdateUserName request,
+            @Valid @RequestBody UpdateProfileRequest request,
             Authentication authentication) {
 
         String email = authentication.getName();
@@ -58,7 +57,7 @@ public class UserController {
 
     @PutMapping("/me/password")
     public ResponseEntity<?> changePassword(
-            @Valid @RequestBody UpdatePassword request,
+            @Valid @RequestBody UpdatePasswordRequest request,
             Authentication authentication) {
 
         String email = authentication.getName();

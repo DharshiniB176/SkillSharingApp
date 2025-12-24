@@ -1,8 +1,8 @@
-package com.skillsharing.user.entity;
+package com.skillsharing.user.dto;
 
 import jakarta.validation.constraints.NotBlank;
 
-public class UpdateUserName {
+public class UpdateProfileRequest {
 
     @NotBlank
     private String fullName;
@@ -11,8 +11,7 @@ public class UpdateUserName {
         return fullName;
     }
 
-    public void  putFullName(String fullName){
+    public void setFullName(String fullName) {
         this.fullName = fullName;
     }
 }
-

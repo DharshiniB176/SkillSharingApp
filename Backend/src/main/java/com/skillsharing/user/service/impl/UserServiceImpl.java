@@ -1,14 +1,14 @@
 package com.skillsharing.user.service.impl;
 
 import com.skillsharing.auth.service.AuthService;
-import com.skillsharing.user.dto.CurrentUserResponse;
-import com.skillsharing.user.dto.RegisterRequest;
-import com.skillsharing.user.dto.UserResponse;
+import com.skillsharing.user.dto.*;
 import com.skillsharing.user.entity.*;
 import com.skillsharing.user.repository.UserRepository;
 import com.skillsharing.user.service.UserService;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -55,34 +55,43 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserResponse updateCurrentUser(String email, UpdateUserName request) {
+    public UserResponse updateCurrentUser(String email, UpdateProfileRequest request) {
 
         UserEntity user = userRepository.findByEmail(email)
-                .orElseThrow(() -> new IllegalArgumentException("User not found"));
+                .orElseThrow(() ->
+                        new ResponseStatusException(
+                                HttpStatus.NOT_FOUND, "User not found"));
 
         user.setFullName(request.getFullName());
 
         UserEntity savedUser = userRepository.save(user);
 
+        return mapToResponse(savedUser);
+    }
+    private UserResponse mapToResponse(UserEntity user) {
         UserResponse response = new UserResponse();
-        response.setId(savedUser.getId());
-        response.setEmail(savedUser.getEmail());
-        response.setFullName(savedUser.getFullName());
-
+        response.setId(user.getId());
+        response.setEmail(user.getEmail());
+        response.setFullName(user.getFullName());
         return response;
     }
 
 
     @Override
-    public void changePassword(String email, UpdatePassword request) {
+    public void changePassword(String email, UpdatePasswordRequest request) {
 
         UserEntity user = userRepository.findByEmail(email)
-                .orElseThrow(() -> new IllegalArgumentException("User not found"));
+                .orElseThrow(() ->
+                        new ResponseStatusException(
+                                HttpStatus.NOT_FOUND, "User not found"));
 
         if (!passwordEncoder.matches(
                 request.getCurrentPassword(),
                 user.getPassword())) {
-            throw new IllegalArgumentException("Current password is incorrect");
+
+            throw new ResponseStatusException(
+                    HttpStatus.BAD_REQUEST,
+                    "Current password is incorrect");
         }
 
         user.setPassword(
