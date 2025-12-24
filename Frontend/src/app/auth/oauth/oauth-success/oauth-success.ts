@@ -14,15 +14,25 @@ export class OauthSuccess implements OnInit {
   private router = inject(Router);
   private auth = inject(AuthService);
 
-  ngOnInit() {
-    const token = this.route.snapshot.queryParamMap.get('token');
+ ngOnInit() {
+  const token = this.route.snapshot.queryParamMap.get('token');
 
-    if (!token) {
-      this.router.navigateByUrl('/auth');
-      return;
-    }
-
-    this.auth.storeToken(token);
-    this.router.navigateByUrl('/dashboard');
+  if (!token) {
+    this.router.navigateByUrl('/auth');
+    return;
   }
+
+  this.auth.storeToken(token);
+
+  this.auth.loadMe().subscribe({
+    next: () => {
+      this.router.navigateByUrl('/dashboard');
+    },
+    error: () => {
+      this.auth.logout();
+      this.router.navigateByUrl('/auth');
+    }
+  });
+}
+
 }

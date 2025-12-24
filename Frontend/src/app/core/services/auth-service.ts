@@ -50,14 +50,27 @@ export class AuthService {
   }
 
   storeToken(token: string) {
-    localStorage.setItem(this.TOKEN_KEY, token);
-  }
+  localStorage.setItem(this.TOKEN_KEY, token);
+
+  localStorage.removeItem(this.USER_KEY);
+  this.user.set(null);
+}
+
 
 
   private loadUser(): User | null {
     const raw = localStorage.getItem(this.USER_KEY);
     return raw ? JSON.parse(raw) : null;
   }
+
+  loadMe() {
+  return this.http.get<User>(`${this.API_URL}/users/me`).pipe(
+    tap(user => {
+      localStorage.setItem(this.USER_KEY, JSON.stringify(user));
+      this.user.set(user);
+    })
+  );
+}
 
   register(payload: {
     fullName: string;
