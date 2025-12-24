@@ -1,12 +1,35 @@
-<div class="min-h-screen bg-[var(--bg-main)] p-6">
+<h1 class="text-2xl font-semibold mb-2 text-[var(--text-main)]">
+  Welcome, {{ auth.user()?.fullName }}
+</h1>
 
-  <h1 class="text-2xl font-semibold text-[var(--text-main)]">
-    Welcome,
-    {{ auth.user()?.fullName }}
-  </h1>
+<p class="text-sm text-[var(--text-muted)] mb-6">
+  Here’s your personalized dashboard
+</p>
 
-  <p class="text-sm text-[var(--text-muted)] mt-1">
-    Glad to see you back 👋
-  </p>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+  <div class="bg-[var(--bg-card)] border border-[var(--border-color)]
+              rounded-xl p-6 shadow-sm">
+    <h3 class="font-medium mb-1">Your Skills</h3>
+    <p class="text-sm text-[var(--text-muted)]">
+      Add and manage your skills
+    </p>
+  </div>
+
+  <div class="bg-[var(--bg-card)] border border-[var(--border-color)]
+              rounded-xl p-6 shadow-sm">
+    <h3 class="font-medium mb-1">Career Paths</h3>
+    <p class="text-sm text-[var(--text-muted)]">
+      Explore recommended careers
+    </p>
+  </div>
+
+  <div class="bg-[var(--bg-card)] border border-[var(--border-color)]
+              rounded-xl p-6 shadow-sm">
+    <h3 class="font-medium mb-1">Skill Sharing</h3>
+    <p class="text-sm text-[var(--text-muted)]">
+      Learn or teach with others
+    </p>
+  </div>
 
 </div>

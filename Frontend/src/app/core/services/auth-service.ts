@@ -1,7 +1,7 @@
 import { Injectable, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { tap } from 'rxjs';
-import { User } from '../../models/user-model';
+import { User } from '../models/user-model';
 
 interface LoginRequest {
   email: string;

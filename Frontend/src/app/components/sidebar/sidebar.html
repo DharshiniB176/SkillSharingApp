@@ -1,0 +1,67 @@
+<aside
+  class="fixed md:relative z-40 h-full
+         bg-[var(--bg-card)]
+         border-r border-[var(--border-color)]
+         transition-all duration-300
+         flex flex-col
+         text-[var(--text-main)]"
+
+  [class.w-64]="open && !mini"
+  [class.w-14]="open && mini"
+  [class.-translate-x-full]="!open"
+  [class.translate-x-0]="open">
+
+  <div class="h-16 flex items-center justify-between px-3
+              border-b border-[var(--border-color)]">
+
+    <span class="font-semibold truncate" [class.hidden]="mini">
+      SkillSharing
+    </span>
+
+    <!-- Desktop mini toggle -->
+    <button
+      class="hidden md:flex w-8 h-8 items-center justify-center
+             rounded-lg hover:bg-[var(--primary)]/10"
+      (click)="toggleMini.emit()">
+      ☰
+    </button>
+
+    <!-- Mobile close -->
+    <button
+      class="md:hidden w-8 h-8 flex items-center justify-center
+             rounded-lg hover:bg-[var(--primary)]/10"
+      (click)="close.emit()">
+      ✕
+    </button>
+
+  </div>
+
+  <nav class="flex-1 p-2 space-y-2">
+
+    <button
+      class="w-full flex items-center justify-center md:justify-start
+             gap-3 px-3 py-2 rounded-lg
+             hover:bg-[var(--primary)]/10"
+      (click)="navigate('/dashboard')">
+      <span class="text-lg">🏠</span>
+      <span [class.hidden]="mini">Dashboard</span>
+    </button>
+
+    <button
+      class="w-full flex items-center justify-center md:justify-start
+             gap-3 px-3 py-2 rounded-lg
+             hover:bg-[var(--primary)]/10">
+      <span class="text-lg">🎯</span>
+      <span [class.hidden]="mini">Career</span>
+    </button>
+
+    <button
+      class="w-full flex items-center justify-center md:justify-start
+             gap-3 px-3 py-2 rounded-lg
+             hover:bg-[var(--primary)]/10">
+      <span class="text-lg">🧠</span>
+      <span [class.hidden]="mini">Skills</span>
+    </button>
+
+  </nav>
+</aside>
