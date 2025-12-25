@@ -1,0 +1,114 @@
+<section class="max-w-7xl mx-auto px-6 py-24">
+
+  <div class="flex items-center justify-between mb-10">
+    <h3 class="text-3xl font-bold text-[var(--text-main)]">
+      Most Popular Courses
+    </h3>
+
+    <button
+      class="text-sm font-medium
+             text-[var(--primary)]
+             hover:underline">
+      Explore more <i class="pi pi-arrow-right"></i>
+    </button>
+  </div>
+
+
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+
+    @for (course of courses; track course.id) {
+
+      <div
+        class="bg-[var(--bg-card)]
+               border border-[var(--border-color)]
+               rounded-2xl
+               overflow-hidden
+               transition
+               hover:-translate-y-2
+               hover:shadow-xl">
+
+        <div class="relative">
+          <img
+            [src]="course.image"
+            [alt]="course.title"
+            class="w-full h-44 object-cover" />
+
+          <button
+            class="absolute top-3 right-3
+                   w-9 h-9
+                   rounded-full
+                   bg-white
+                   flex items-center justify-center
+                   shadow">
+            <i class="pi pi-heart text-[var(--error)]"></i>
+          </button>
+        </div>
+
+        <div class="p-5">
+
+          <p class="text-xs text-[var(--text-muted)] mb-1">
+            {{ course.category }}
+          </p>
+
+          <h4 class="font-semibold text-sm leading-snug mb-3">
+            {{ course.title }}
+          </h4>
+
+          <div class="flex gap-1 text-yellow-400 text-sm mb-3">
+            @for (star of [].constructor(course.rating); track $index) {
+              <i class="pi pi-star-fill"></i>
+            }
+          </div>
+
+          <div class="flex items-center gap-4 text-xs text-[var(--text-muted)] mb-4">
+            <span class="flex items-center gap-1">
+              <i class="pi pi-clock"></i>
+              {{ course.hours }}
+            </span>
+
+            <span class="flex items-center gap-1">
+              <i class="pi pi-book"></i>
+              Lesson {{ course.lessons }}
+            </span>
+
+            <span class="flex items-center gap-1">
+              <i class="pi pi-users"></i>
+              {{ course.seats }} Seat
+            </span>
+          </div>
+
+          <div class="flex items-center justify-between">
+
+            <div class="flex items-center gap-2">
+              <span class="font-semibold text-lg text-[var(--text-main)]">
+                ${{ course.price }}
+              </span>
+
+              @if (course.oldPrice) {
+                <span class="text-xs line-through text-[var(--text-muted)]">
+                  ${{ course.oldPrice }}
+                </span>
+              }
+            </div>
+
+            <button
+              class="flex items-center gap-2
+                     text-sm
+                     text-[var(--primary)]
+                     font-medium
+                     border p-3 ">
+              <i class="pi pi-shopping-cart"></i>
+              Add to cart
+            </button>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    }
+
+  </div>
+
+</section>

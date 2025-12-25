@@ -1,15 +1,23 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { ThemeService } from '../../core/services/theme-service';
+import { CarouselModule } from 'primeng/carousel';
+import { HowItWorks } from "./how-it-works/how-it-works";
+import { Topcategory } from './topcategory/topcategory';
+import { Courses } from './courses/courses';
+import { Testimonials } from "./testimonials/testimonials";
+import { PopularCourses } from "./popular-courses/popular-courses";
+import { JoinNow } from "./join-now/join-now";
 
 @Component({
   selector: 'app-landing',
-  imports: [],
+  imports: [CarouselModule, Topcategory, Courses, HowItWorks, Testimonials, PopularCourses, JoinNow],
   templateUrl: './landing.html',
   styleUrl: './landing.scss',
 })
 export class Landing {
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, public theme:ThemeService) {}
 
   goToLogin() {
     this.router.navigate(['/auth'], { queryParams: { mode: 'login' } });
@@ -18,4 +26,8 @@ export class Landing {
   goToRegister() {
     this.router.navigate(['/auth'], { queryParams: { mode: 'register' } });
   }
+
+
+ 
+
 }

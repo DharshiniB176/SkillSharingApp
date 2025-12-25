@@ -4,7 +4,7 @@ import { Navbar } from "../navbar/navbar";
 
 @Component({
   selector: 'app-dashboard',
-  imports: [Navbar],
+  imports: [],
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.scss',
 })

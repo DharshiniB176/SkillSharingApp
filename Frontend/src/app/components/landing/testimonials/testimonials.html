@@ -1,0 +1,72 @@
+<section class="relative bg-[var(--bg-main)]/60 py-28 overflow-hidden">
+
+  <div class="absolute top-10 left-10 text-8xl text-[var(--primary)]/10">
+    “
+  </div>
+
+  <div class="max-w-7xl mx-auto px-6 text-center mb-16">
+    <h3 class="text-4xl font-bold text-[var(--text-main)] mb-4">
+      Why students love SkillSharing
+    </h3>
+    <p class="text-[var(--text-muted)] max-w-2xl mx-auto">
+      Whether you’re just starting out or sharpening your expertise, SkillSharing
+      supports you at every step of your learning journey.
+    </p>
+  </div>
+
+  <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-10">
+
+    @for (item of testimonials; track item.id) {
+
+      <div
+        class="bg-[var(--bg-card)]
+               border border-[var(--border-color)]
+               rounded-3xl p-8
+               text-center
+               transition
+               hover:-translate-y-2
+               hover:shadow-2xl
+               animate-card-fade">
+
+        <img
+          [src]="item.avatar"
+          [alt]="item.name"
+          class="w-16 h-16 rounded-full mx-auto mb-4 object-cover" />
+
+        <h4 class="font-semibold text-[var(--text-main)]">
+          {{ item.name }}
+        </h4>
+
+        <p class="text-sm text-[var(--text-muted)] mb-3">
+          {{ item.role }}
+        </p>
+
+        <div class="flex justify-center gap-1 mb-4">
+          @for (star of [].constructor(item.rating); track $index) {
+            <span class="text-yellow-400">★</span>
+          }
+        </div>
+
+        <p class="text-sm italic text-[var(--text-muted)] leading-relaxed">
+          “{{ item.quote }}”
+        </p>
+
+      </div>
+
+    }
+
+  </div>
+
+  <div class="text-center mt-14">
+    <button
+      class="px-6 py-3 rounded-lg
+             border border-[var(--border-color)]
+             text-[var(--primary)]
+             font-medium
+             transition
+             hover:bg-[var(--bg-input)]">
+      See all reviews
+    </button>
+  </div>
+
+</section>
