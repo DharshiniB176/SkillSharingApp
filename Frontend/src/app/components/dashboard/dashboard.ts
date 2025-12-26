@@ -1,6 +1,5 @@
 import { Component, inject } from '@angular/core';
 import { AuthService } from '../../core/services/auth-service';
-import { Navbar } from "../navbar/navbar";
 
 @Component({
   selector: 'app-dashboard',
@@ -11,6 +10,5 @@ import { Navbar } from "../navbar/navbar";
 export class Dashboard {
 
   auth = inject(AuthService);
-
-
 }
+

@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { ThemeService } from '../../core/services/theme-service';
-import { CarouselModule } from 'primeng/carousel';
 import { HowItWorks } from "./how-it-works/how-it-works";
 import { Topcategory } from './topcategory/topcategory';
 import { Courses } from './courses/courses';
 import { Testimonials } from "./testimonials/testimonials";
 import { PopularCourses } from "./popular-courses/popular-courses";
 import { JoinNow } from "./join-now/join-now";
+import { CarouselModule } from 'primeng/carousel';
 
 @Component({
   selector: 'app-landing',
