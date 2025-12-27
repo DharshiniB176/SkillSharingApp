@@ -40,6 +40,8 @@ public class SecurityConfig {
             throws Exception {
 
         http
+                .formLogin(form -> form.disable())
+                .httpBasic(basic -> basic.disable())
                 .cors(cors -> cors.configurationSource(
                         http.getSharedObject(
                                 org.springframework.web.cors.CorsConfigurationSource.class
@@ -53,6 +55,9 @@ public class SecurityConfig {
                         .requestMatchers("/oauth2/**", "/login/**").permitAll()
                         .requestMatchers(HttpMethod.POST, "/sessions").permitAll()
                         .requestMatchers(HttpMethod.POST, "/users").permitAll()
+                        .requestMatchers("/user/skills").authenticated()
+                        .requestMatchers(HttpMethod.GET, "/skills/**").permitAll()
+
                         .anyRequest().authenticated()
                 )
                 .oauth2Login(oauth -> oauth
@@ -61,6 +66,12 @@ public class SecurityConfig {
                         )
                         .successHandler(oAuth2SuccessHandler)
                 )
+                .oauth2Login(oauth -> oauth
+                        .authorizationEndpoint(auth -> auth
+                                .baseUri("/oauth2/authorize")
+                        )
+                )
+
                 .addFilterBefore(
                         jwtAuthenticationFilter,
                         UsernamePasswordAuthenticationFilter.class
