@@ -50,13 +50,16 @@ public class UserSkillController {
             return skillService.getMySkills(auth.getName());
         }
 
-        @DeleteMapping("/{skillId}")
-        public ResponseEntity<?> removeSkill(
-                @PathVariable Long skillId,
-                Authentication auth) {
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> removeSkill(
+            @PathVariable Long id,
+            Authentication authentication) {
 
-            skillService.removeSkillFromUser(auth.getName(), skillId);
-            return ResponseEntity.ok(Map.of("message", "Skill removed"));
-        }
+        String email = authentication.getName();
+        skillService.removeSkillFromUser(email, id);
+
+        return ResponseEntity.noContent().build();
     }
+
+}
 

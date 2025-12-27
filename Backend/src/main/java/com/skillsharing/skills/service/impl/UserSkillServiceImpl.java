@@ -9,6 +9,7 @@ import com.skillsharing.skills.repository.UserSkillRepository;
 import com.skillsharing.skills.service.UserSkillService;
 import com.skillsharing.user.entity.UserEntity;
 import com.skillsharing.user.repository.UserRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -88,19 +89,31 @@ public class UserSkillServiceImpl implements UserSkillService {
     }
 
     @Override
+    @Transactional
     public void removeSkill(String email, Long userSkillId) {
 
         UserEntity user = userRepository.findByEmail(email)
                 .orElseThrow(() -> new IllegalArgumentException("User not found"));
 
-        UserSkill userSkill = userSkillRepository.findById(userSkillId)
+        UserSkill userSkill = userSkillRepository
+                .findById(userSkillId)
                 .orElseThrow(() -> new IllegalArgumentException("User skill not found"));
 
         if (!userSkill.getUser().getId().equals(user.getId())) {
-            throw new IllegalArgumentException("Unauthorized skill removal");
+            throw new IllegalArgumentException("Unauthorized delete attempt");
         }
 
+        Skill skill = userSkill.getSkill(); // ✅ CORRECT
+
         userSkillRepository.delete(userSkill);
+
+        skill.setUsageCount(Math.max(0, skill.getUsageCount() - 1));
+
+        if (skill.getUsageCount() < 2) {
+            skill.setCommunityApproved(false);
+        }
+
+        skillRepository.save(skill);
     }
 
 

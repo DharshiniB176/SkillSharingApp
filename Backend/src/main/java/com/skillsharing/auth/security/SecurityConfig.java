@@ -42,22 +42,25 @@ public class SecurityConfig {
         http
                 .formLogin(form -> form.disable())
                 .httpBasic(basic -> basic.disable())
-                .cors(cors -> cors.configurationSource(
-                        http.getSharedObject(
-                                org.springframework.web.cors.CorsConfigurationSource.class
-                        )
-                ))
+                .cors(cors -> {})
+
+
+//                        cors.configurationSource(
+//                        http.getSharedObject(
+//                                org.springframework.web.cors.CorsConfigurationSource.class
+//                        )
+
+
                 .csrf(csrf -> csrf.disable())
                 .sessionManagement(session ->
                         session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 )
                 .authorizeHttpRequests(auth -> auth
+                        .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                         .requestMatchers("/oauth2/**", "/login/**").permitAll()
                         .requestMatchers(HttpMethod.POST, "/sessions").permitAll()
                         .requestMatchers(HttpMethod.POST, "/users").permitAll()
-                        .requestMatchers("/user/skills").authenticated()
-                        .requestMatchers(HttpMethod.GET, "/skills/**").permitAll()
-
+                        .requestMatchers("/user/skills/**").authenticated()
                         .anyRequest().authenticated()
                 )
                 .oauth2Login(oauth -> oauth
