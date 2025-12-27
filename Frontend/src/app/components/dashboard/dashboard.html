@@ -2,7 +2,7 @@
   Welcome, {{ auth.user()?.fullName }}
 </h1>
 
-<p class="text-sm text-[var(--text-muted)] mb-6">
+<p class="text-sm text-[var(--text-main)] mb-6">
   Here’s your personalized dashboard
 </p>
 
@@ -10,26 +10,181 @@
 
   <div class="bg-[var(--bg-card)] border border-[var(--border-color)]
               rounded-xl p-6 shadow-sm">
-    <h3 class="font-medium mb-1">Your Skills</h3>
-    <p class="text-sm text-[var(--text-muted)]">
+    <h3 class="font-medium mb-1 text-[var(--text-main)]">Your Skills</h3>
+    <p class="text-sm text-[var(--text-main)]">
       Add and manage your skills
     </p>
   </div>
 
   <div class="bg-[var(--bg-card)] border border-[var(--border-color)]
               rounded-xl p-6 shadow-sm">
-    <h3 class="font-medium mb-1">Career Paths</h3>
-    <p class="text-sm text-[var(--text-muted)]">
+    <h3 class="font-medium mb-1 text-[var(--text-main)]">Career Paths</h3>
+    <p class="text-sm text-[var(--text-main)]">
       Explore recommended careers
     </p>
   </div>
 
   <div class="bg-[var(--bg-card)] border border-[var(--border-color)]
               rounded-xl p-6 shadow-sm">
-    <h3 class="font-medium mb-1">Skill Sharing</h3>
-    <p class="text-sm text-[var(--text-muted)]">
+    <h3 class="font-medium mb-1 text-[var(--text-main)]">Skill Sharing</h3>
+    <p class="text-sm text-[var(--text-main)]">
       Learn or teach with others
     </p>
+  </div>
+
+</div>
+
+
+<div class="space-y-8 mt-2">
+
+ <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+  <!-- LEFT : PIE / PROGRESS -->
+  <div
+    class="bg-[var(--bg-card)]
+           border border-[var(--border-color)]
+           rounded-2xl p-6
+           flex flex-col items-center justify-center">
+
+    <h3 class="text-sm font-medium text-[var(--text-muted)] mb-4">
+      Learning Progress
+    </h3>
+
+    <!-- Circular Progress -->
+    <div
+      class="relative w-36 h-36 rounded-full flex items-center justify-center"
+      [style.background]="
+        'conic-gradient(var(--primary) ' + progress + '%, var(--bg-input) 0)'
+      ">
+
+      <div
+        class="absolute w-24 h-24 rounded-full
+               bg-[var(--bg-card)]
+               flex flex-col items-center justify-center">
+
+        <span class="text-2xl font-semibold">
+          {{ progress }}%
+        </span>
+        <span class="text-xs text-[var(--text-muted)]">
+          Completed
+        </span>
+
+      </div>
+    </div>
+
+  </div>
+
+  <!-- RIGHT : CALENDAR -->
+  <div
+    class="md:col-span-2
+           bg-[var(--bg-card)]
+           border border-[var(--border-color)]
+           rounded-2xl p-6">
+
+    <h3 class="font-medium mb-4">
+      Activity Calendar
+    </h3>
+
+    <div class="calendar-wrapper">
+      <p-datepicker
+        [(ngModel)]="selectedDate"
+        view="date"
+        dateFormat="dd MM yy"
+        inline="true">
+      </p-datepicker>
+    </div>
+ <!-- STREAK + ACTIVE DAYS -->
+    <div class="grid grid-cols-2 gap-4 mt-6 text-center">
+
+      <div class="bg-[var(--bg-input)] rounded-xl p-3">
+        <p class="text-xl font-semibold">🔥 {{ streak }}</p>
+        <p class="text-xs text-[var(--text-muted)]">
+          Day Streak
+        </p>
+      </div>
+
+      <div class="bg-[var(--bg-input)] rounded-xl p-3">
+        <p class="text-xl font-semibold">✅ {{ activeDays }}</p>
+        <p class="text-xs text-[var(--text-muted)]">
+          Active Days
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+
+  <!-- BAR CHART -->
+  <div class="bg-[var(--bg-card)] border border-[var(--border-color)]
+              rounded-2xl p-6 text-[var(--text-main)]">
+
+    <h3 class="font-medium mb-6">
+      Skills by Domain
+    </h3>
+
+    <div class="space-y-4">
+
+      @for (domain of domainStats; track domain.name) {
+
+        <div>
+          <div class="flex justify-between text-sm mb-1">
+            <span>{{ domain.name }}</span>
+            <span class="text-[var(--text-main)]">
+              {{ domain.percent }}%
+            </span>
+          </div>
+
+          <div class="h-3 rounded-full bg-[var(--bg-input)] overflow-hidden">
+            <div
+              class="h-full rounded-full bg-[var(--primary)] transition-all"
+              [style.width.%]="domain.percent">
+            </div>
+          </div>
+        </div>
+
+      }
+
+    </div>
+
+  </div>
+
+  <!-- SKILLS LIST -->
+  <div class="bg-[var(--bg-card)] border border-[var(--border-color)]
+              rounded-2xl p-6 text-[var(--text-main)]">
+
+    <h3 class="font-medium mb-6">
+      My Skills
+    </h3>
+
+    <div class="space-y-5">
+
+      @for (domain of domainStats; track domain.name) {
+
+        <div>
+          <h4 class="text-sm font-semibold mb-2">
+            {{ domain.name }}
+          </h4>
+
+          <div class="flex flex-wrap gap-2">
+            @for (skill of domain.skills; track skill) {
+
+              <span
+                class="px-3 py-1.5 rounded-full text-sm
+                       bg-[var(--bg-input)]
+                       border border-[var(--border-color)]">
+                {{ skill }}
+              </span>
+
+            }
+          </div>
+        </div>
+
+      }
+
+    </div>
+
   </div>
 
 </div>

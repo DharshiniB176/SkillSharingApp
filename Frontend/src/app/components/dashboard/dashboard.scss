@@ -1,0 +1,22 @@
+
+.calendar-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+:host ::ng-deep .p-datepicker {
+  width: 320px;         
+  border: none;
+}
+
+:host ::ng-deep .p-datepicker table {
+  font-size: 0.85rem;    
+}
+
+:host ::ng-deep .p-datepicker td {
+  padding: 0.35rem;     
+}
+
+:host ::ng-deep .p-datepicker-header {
+  padding: 0.5rem;
+}
