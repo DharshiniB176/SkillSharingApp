@@ -6,18 +6,18 @@ import { OauthSuccess } from './auth/oauth/oauth-success/oauth-success';
 import { Sidebar } from './components/sidebar/sidebar';
 import { DashboardLayout } from './components/dashboard-layout/dashboard-layout';
 import { Dashboard } from './components/dashboard/dashboard';
+import { SkillSelect } from './components/skill-select/skill-select';
 
 export const routes: Routes = [
   { path: '', component: Landing },
-  { path: 'auth', component: AuthContainer },{
+  { path: 'auth', component: AuthContainer },
+  {
   path: 'dashboard',
   component: DashboardLayout,
   canActivate: [authGuard],
   children: [
-    {
-      path: '',
-      component: Dashboard
-    }
+    {path: '', component: Dashboard},
+     {path: 'skills',component: SkillSelect}
   ]
 },
 {
@@ -28,7 +28,7 @@ export const routes: Routes = [
 
 
    { path: 'oauth-success', component: OauthSuccess },
-   {path: 'sidebar',component: Sidebar}
+  
    
 
 ];
