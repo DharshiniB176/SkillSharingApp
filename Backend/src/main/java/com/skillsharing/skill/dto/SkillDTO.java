@@ -1,19 +1,10 @@
-package com.skillsharing.skills.dto;
+package com.skillsharing.skill.dto;
 
-public class SkillSearchResponse {
+public class SkillDTO {
 
-
-    private Long id;
     private String name;
     private String category;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
+    private String description;
 
     public String getName() {
         return name;
@@ -31,4 +22,11 @@ public class SkillSearchResponse {
         this.category = category;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
 }

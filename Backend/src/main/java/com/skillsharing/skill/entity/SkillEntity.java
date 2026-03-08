@@ -1,11 +1,21 @@
-package com.skillsharing.skills.dto;
+package com.skillsharing.skill.entity;
 
-public class SkillResponse {
+import jakarta.persistence.*;
 
+@Entity
+@Table(name = "skills")
+public class SkillEntity {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(nullable = false)
     private String name;
+
     private String category;
-    private boolean communityApproved;
+
+    private String description;
 
     public Long getId() {
         return id;
@@ -31,11 +41,11 @@ public class SkillResponse {
         this.category = category;
     }
 
-    public boolean isCommunityApproved() {
-        return communityApproved;
+    public String getDescription() {
+        return description;
     }
 
-    public void setCommunityApproved(boolean communityApproved) {
-        this.communityApproved = communityApproved;
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

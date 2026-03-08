@@ -2,7 +2,7 @@ package com.skillsharing.user.entity;
 
 import com.skillsharing.common.entity.BaseEntity;
 import jakarta.persistence.*;
-
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "users")
@@ -15,6 +15,7 @@ public class UserEntity {
         @Column(nullable = false, unique = true, length = 150)
         private String email;
 
+        @JsonIgnore
         @Column(nullable = true)
         private String password;
 
