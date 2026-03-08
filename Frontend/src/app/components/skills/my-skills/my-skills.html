@@ -1,0 +1,107 @@
+    <div class="space-y-8">
+
+    <!-- PAGE HEADER -->
+    <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+
+        <div>
+        <h1 class="text-2xl font-semibold text-[var(--text-main)]">
+            My Skills
+        </h1>
+
+        <p class="text-sm text-[var(--text-muted)]">
+            Skills you can teach or want to learn
+        </p>
+        </div>
+
+    <button
+    (click)="openAddSkill()"
+    class="px-4 py-2 rounded-lg text-sm font-medium
+            bg-[var(--primary)] text-[var(--text-inverse)]
+            hover:bg-[var(--primary-hover)]">
+
+    <i class="pi pi-plus mr-2"></i>
+    Add Skill
+
+    </button>
+
+    </div>
+
+    <!-- SKILL GROUPS -->
+
+    <div class="space-y-8">
+
+        @for (group of skills; track group.category) {
+
+        <div>
+
+            <!-- CATEGORY TITLE -->
+
+            <h2 class="text-lg font-semibold text-[var(--text-main)] mb-4">
+            {{ group.category }}
+            </h2>
+
+            <!-- SKILLS GRID -->
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+
+            @for (skill of group.items; track skill.name) {
+
+                <div
+                class="bg-[var(--bg-card)]
+                        border border-[var(--border-color)]
+                        rounded-xl p-5
+                        shadow-sm
+                        hover:shadow-md
+                        transition">
+
+                <!-- SKILL HEADER -->
+
+                <div class="flex items-center justify-between mb-3">
+
+                    <h3 class="font-medium text-[var(--text-main)]">
+                    {{ skill.name }}
+                    </h3>
+
+                    <span
+                    class="text-xs px-2 py-1 rounded-full
+                            border
+                            bg-[var(--bg-input)]
+                            border-[var(--border-color)]">
+
+                    {{ skill.level }}
+
+                    </span>
+
+                </div>
+
+                <!-- TYPE BADGE -->
+
+                <span
+                    class="text-xs px-3 py-1 rounded-full font-medium"
+                    [ngClass]="
+                    skill.type === 'TEACH'
+                        ? 'bg-green-100 text-green-700'
+                        : 'bg-blue-100 text-blue-700'
+                    ">
+
+                    {{ skill.type }}
+
+                </span>
+
+                </div>
+
+            }
+
+            </div>
+
+        </div>
+
+        }
+
+    </div>
+
+    </div>
+
+    <app-add-skill-modal
+    (skillAdded)="handleSkillAdded($event)">
+</app-add-skill-modal>

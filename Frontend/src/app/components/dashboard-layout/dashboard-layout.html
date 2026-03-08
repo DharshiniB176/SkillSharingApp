@@ -1,26 +1,15 @@
 <div class="flex min-h-screen bg-[var(--bg-main)]">
 
-  <app-sidebar
-    [open]="sidebarOpen()"
-    [mini]="miniMode()"
-    (close)="closeSidebar()"
-    (toggleMini)="toggleMiniMode()">
+  <app-sidebar [open]="sidebarOpen()" [mini]="miniMode()" (close)="closeSidebar()" (toggleMini)="toggleMiniMode()">
   </app-sidebar>
 
-  <div
-  class="fixed inset-0 bg-black/40 z-30 md:hidden
-         transition-opacity duration-300"
-  [class.opacity-100]="sidebarOpen()"
-  [class.opacity-0]="!sidebarOpen()"
-  [class.pointer-events-auto]="sidebarOpen()"
-  [class.pointer-events-none]="!sidebarOpen()"
-  (click)="closeSidebar()">
-</div>
+  <div class="fixed inset-0 bg-black/40 z-30 md:hidden
+         transition-opacity duration-300" [class.opacity-100]="sidebarOpen()" [class.opacity-0]="!sidebarOpen()"
+    [class.pointer-events-auto]="sidebarOpen()" [class.pointer-events-none]="!sidebarOpen()" (click)="closeSidebar()">
+  </div>
   <div class="flex-1 flex flex-col">
 
-    <app-navbar
-      [sidebarOpen]="sidebarOpen()"
-      (menuToggle)="toggleSidebar()">
+    <app-navbar [sidebarOpen]="sidebarOpen()" (menuToggle)="toggleSidebar()">
     </app-navbar>
 
     <main class="flex-1 p-6 overflow-auto">

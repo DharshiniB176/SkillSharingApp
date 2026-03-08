@@ -1,0 +1,84 @@
+<p-dialog
+  [(visible)]="visible"
+  [modal]="true"
+  [draggable]="false"
+  [resizable]="false"
+  [breakpoints]="{ '960px': '75vw', '640px': '90vw' }"
+  [style]="{ width: '420px' }"
+  header="Add Skill">
+
+  <div class="space-y-5">
+
+    <!-- Skill -->
+
+    <div>
+      <label class="block text-sm mb-1 text-[var(--text-main)]">
+        Skill
+      </label>
+
+      <p-select
+        [options]="skillOptions"
+        [(ngModel)]="selectedSkill"
+        optionLabel="label"
+        optionValue="value"
+        placeholder="Select Skill"
+        class="w-full">
+      </p-select>
+    </div>
+
+      <!-- Level -->
+
+    <div>
+      <label class="block text-sm mb-1 text-[var(--text-main)]">
+        Level
+      </label>
+
+      <p-select
+        [options]="levelOptions"
+        [(ngModel)]="selectedLevel"
+        optionLabel="label"
+        optionValue="value"
+        placeholder="Select Level"
+        class="w-full">
+      </p-select>
+    </div>
+    
+    <!-- Type -->
+
+    <div>
+      <label class="block text-sm mb-1 text-[var(--text-main)]">
+        Type
+      </label>
+
+      <p-selectButton
+        [options]="typeOptions"
+        [(ngModel)]="selectedType">
+      </p-selectButton>
+    </div>
+
+  
+
+    <!-- Actions -->
+
+    <div class="flex justify-end gap-3 pt-2">
+
+      <button
+        pButton
+        label="Cancel"
+        class="p-button-text"
+        (click)="close()">
+      </button>
+
+      <button
+        pButton
+        label="Add Skill"
+        icon="pi pi-check"
+        
+        (click)="addSkill()">
+      </button>
+
+    </div>
+
+  </div>
+
+</p-dialog>

@@ -8,7 +8,8 @@ import { FormsModule } from '@angular/forms';
   selector: 'app-dashboard',
   imports: [DatePicker, FormsModule],
   templateUrl: './dashboard.html',
-  styleUrl: './dashboard.scss',
+  styleUrls: ['./dashboard.scss'],
+  standalone: true
 })
 export class Dashboard {
 
