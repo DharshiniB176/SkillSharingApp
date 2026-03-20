@@ -60,8 +60,11 @@ public class SecurityConfig {
                         .requestMatchers("/oauth2/**", "/login/**").permitAll()
                         .requestMatchers(HttpMethod.POST, "/sessions").permitAll()
                         .requestMatchers(HttpMethod.POST, "/users").permitAll()
-                        .requestMatchers("/user/skills/**").authenticated()
-                        .anyRequest().authenticated()
+                        .requestMatchers("/api/**").authenticated()
+                        .anyRequest().permitAll()
+                )
+                .exceptionHandling(ex -> ex
+                        .authenticationEntryPoint(restEntryPoint)
                 )
                 .oauth2Login(oauth -> oauth
                         .userInfoEndpoint(userInfo ->
