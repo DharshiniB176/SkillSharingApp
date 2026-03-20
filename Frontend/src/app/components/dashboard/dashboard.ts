@@ -28,7 +28,64 @@ export class Dashboard {
 
   selectedDate = new Date();
   streak = 15;
-  activeDays = 14
-  progress = 50
+  activeDays = 14;
+  progress = 50;
+  careerInsight ={
+        name: 'Frontend Developer',
+        progress: 80,
+        missingSkills: ['Node.js']
+      }
+
+      allCareers = [
+  {
+    name: 'Frontend Developer',
+    skills: ['HTML', 'CSS', 'Angular', 'Node.js']
+  },
+  {
+    name: 'Backend Developer',
+    skills: ['Java', 'Spring Boot', 'MySQL']
+  }
+];
+
+userSkills = ['HTML', 'CSS', 'Angular'];
+
+
+calculateCareerInsight() {
+
+  let bestCareer: any = null;
+  let maxMatch = 0;
+
+  this.allCareers.forEach(career => {
+
+    const matchedSkills = career.skills.filter(skill =>
+      this.userSkills.includes(skill)
+    );
+
+    const progress = Math.round(
+      (matchedSkills.length / career.skills.length) * 100
+    );
+
+    if (progress > maxMatch) {
+
+      maxMatch = progress;
+
+      bestCareer = {
+        name: career.name,
+        progress: progress,
+        missingSkills: career.skills.filter(
+          skill => !this.userSkills.includes(skill)
+        )
+      };
+
+    }
+
+  });
+
+  this.careerInsight = bestCareer;
+
+}
+ngOnInit() {
+  this.calculateCareerInsight();
+}
 }
 

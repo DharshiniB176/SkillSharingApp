@@ -1,0 +1,54 @@
+<div class="space-y-6">
+
+  <h1 class="text-2xl font-semibold text-(--text-main)">
+    My Requests
+  </h1>
+
+  <div class="space-y-4">
+
+    @for (request of requests; track request.id) {
+
+      <div
+        class="bg-(--bg-card)
+               border border-(--border-color)
+               rounded-xl p-4">
+
+        <p class="text-(--text-main)">
+
+          Request to
+          <strong>{{ request.teacher.fullName }}</strong>
+          for
+          <strong>{{ request.skill.name }}</strong>
+
+        </p>
+
+        <!-- <span
+          class="text-xs px-3 py-1 rounded-full
+                 border border-(--border-color)
+                 bg-(--bg-input)">
+
+          {{ request.status }}
+
+        </span> -->
+
+        <span
+  class="text-xs px-3 py-1 rounded-full font-medium"
+  [ngClass]="
+    request.status === 'PENDING'
+      ? 'bg-yellow-100 text-yellow-700'
+      : request.status === 'ACCEPTED'
+      ? 'bg-green-100 text-green-700'
+      : 'bg-red-100 text-red-700'
+  ">
+
+  {{ request.status }}
+
+</span>
+
+      </div>
+
+    }
+
+  </div>
+
+</div>

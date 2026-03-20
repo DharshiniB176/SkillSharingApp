@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { MatchService } from '../../../core/services/match-service';
 import { AuthService } from '../../../core/services/auth-service';
+import { RequestService } from '../../../core/services/request-service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-matches',
@@ -14,14 +16,53 @@ export class Matches {
 
   matches: any[] = [];
 
+  selectedSkill: string | null = null;
+
   constructor(
     private matchService: MatchService,
-    private auth: AuthService
+    private auth: AuthService,
+    private requestService: RequestService,
+    private route: ActivatedRoute,
+    private router: Router
   ) {}
 
+  // ngOnInit() {
+  //   this.loadMatches();
+  // }
+
   ngOnInit() {
-    this.loadMatches();
-  }
+
+  this.route.queryParams.subscribe(params => {
+
+    const skill = params['skill'];
+
+    if (skill) {
+      this.selectedSkill = skill;
+      this.loadMatchesBySkill(skill);
+    } else {
+      this.selectedSkill = null;
+      this.loadMatches();
+    }
+
+  });
+
+}
+loadMatchesBySkill(skillName: string) {
+
+  const userId = this.auth.user()?.id;
+
+  if (!userId) return;
+
+  this.matchService.getMatches(userId)
+    .subscribe((data: any[]) => {
+
+      this.matches = data.filter(
+        m => m.skillName.toLowerCase() === skillName.toLowerCase()
+      );
+
+    });
+
+}
 
   loadMatches() {
 
@@ -37,4 +78,33 @@ export class Matches {
       });
 
   }
+
+
+requested: Set<number> = new Set();
+
+requestSession(match: any) {
+
+  const userId = this.auth.user()?.id;
+
+  if (!userId) return;
+
+  const payload = {
+    teacherId: match.userId,
+    skillId: match.skillId
+  };
+
+  this.requestService.sendRequest(userId, payload)
+    .subscribe(() => {
+
+      this.requested.add(match.userId);
+
+    });
+
+}
+
+clearFilter() {
+
+  this.router.navigate(['/dashboard/matches']);
+
+}
 }

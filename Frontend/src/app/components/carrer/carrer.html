@@ -1,0 +1,130 @@
+<div class="space-y-8">
+
+  <!-- HEADER -->
+  <div>
+    <h1 class="text-2xl font-semibold text-(--text-main)">
+      Recommended Careers
+    </h1>
+
+    <p class="text-sm text-(--text-muted)">
+      Based on your interests and skills
+    </p>
+  </div>
+
+  <!-- CAREER CARDS -->
+
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+    @for (career of careers; track career.name) {
+
+      <div
+        class="bg-(--bg-card)
+               border border-(--border-color)
+               rounded-xl p-6
+               shadow-sm
+               hover:shadow-md
+               transition">
+
+        <!-- TITLE -->
+        <div class="flex justify-between items-center mb-3">
+
+          <h3 class="text-lg font-semibold">
+            {{ career.name }}
+          </h3>
+
+          <span
+            class="text-xs px-3 py-1 rounded-full
+                   bg-(--bg-input)
+                   border border-(--border-color)">
+
+            {{ career.match }}% Match
+
+          </span>
+
+        </div>
+
+        <!-- REQUIRED SKILLS -->
+        <div class="mb-3">
+
+          <p class="text-sm text-(--text-muted) mb-2">
+            Required Skills
+          </p>
+
+          <div class="flex flex-wrap gap-2">
+
+            @for (skill of career.requiredSkills; track skill) {
+
+              <span
+                class="px-3 py-1 rounded-full text-xs
+                       bg-green-100 text-green-700">
+
+                {{ skill }}
+
+              </span>
+
+            }
+
+          </div>
+
+        </div>
+
+        <!-- MISSING SKILLS -->
+        <div>
+
+          <p class="text-sm text-(--text-muted) mb-2">
+            Missing Skills
+          </p>
+
+          <div class="flex flex-wrap gap-2">
+
+            <!-- @for (skill of career.missingSkills; track skill) {
+
+              <span
+                class="px-3 py-1 rounded-full text-xs
+                       bg-red-100 text-red-700">
+
+                {{ skill }}
+
+              </span>
+
+            } -->
+
+
+            @for (skill of career.missingSkills; track skill) {
+
+  <div class="flex items-center gap-2">
+
+    <span
+      class="px-3 py-1 rounded-full text-xs
+             bg-red-100 text-red-700">
+
+      {{ skill }}
+
+    </span>
+
+    <button
+      (click)="learnSkill(skill)"
+      class="text-xs px-2 py-1 rounded
+             bg-(--primary)
+             text-(--text-inverse)
+             hover:bg-(--primary-hover)">
+
+      Learn
+
+    </button>
+
+  </div>
+
+}
+
+          </div>
+
+        </div>
+
+      </div>
+
+    }
+
+  </div>
+
+</div>

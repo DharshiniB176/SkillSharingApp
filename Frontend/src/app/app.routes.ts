@@ -8,6 +8,11 @@ import { DashboardLayout } from './components/dashboard-layout/dashboard-layout'
 import { Dashboard } from './components/dashboard/dashboard';
 import { MySkills } from './components/skills/my-skills/my-skills';
 import { Matches } from './components/skills/matches/matches';
+import { IncomingRequest } from './components/incoming-request/incoming-request';
+import { MyRequests } from './components/my-requests/my-requests';
+import { VideoCall } from './components/video-call/video-call';
+import { Interests } from './components/interests/interests';
+import { Carrer } from './components/carrer/carrer';
 
 export const routes: Routes = [
   { path: '', component: Landing },
@@ -19,8 +24,13 @@ export const routes: Routes = [
   children: [
     {path: '', component: Dashboard,  pathMatch: 'full'},
       {path: 'my-skills',component: MySkills},
-      { path: 'matches', component: Matches }
-     
+      { path: 'matches', component: Matches },
+    { path: 'incoming-requests', component: IncomingRequest },
+    { path: 'my-requests', component: MyRequests },
+    { path: 'call/:room', component: VideoCall },
+    { path: 'interest', component: Interests},
+    { path: 'carrer', component: Carrer },
+
   ]
 },
 {
@@ -32,6 +42,6 @@ export const routes: Routes = [
 
    { path: 'oauth-success', component: OauthSuccess },
 
-   
+
 
 ];

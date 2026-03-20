@@ -1,4 +1,4 @@
-<div class="min-h-screen bg-[var(--bg-main)] text-[var(--text-main)]">
+<div class="min-h-screen bg-(--bg-main) text-(--text-main)">
 
   <header class="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between">
     <h1 class="text-xl font-semibold tracking-wide">
@@ -8,20 +8,20 @@
     <div class="flex items-center gap-4">
       <button
     (click)="theme.toggleTheme()"
-    class="mt-4 px-4 py-2 border border-border"
+    class="px-4 py-2 "
   >
     {{ theme.isDarkMode() ? '🌙 Dark' : '🌞 Light' }}
   </button>
       <button
-        class="text-sm text-[var(--text-muted)] hover:text-[var(--text-main)] transition"
+        class="text-sm text-(--text-muted) hover:text-(--text-main) transition"
         (click)="goToLogin()">
         Login
       </button>
 
       <button
         class="px-4 py-2 rounded-lg
-               bg-[var(--primary)]
-               text-[var(--text-inverse)]
+               bg-(--primary)
+               text-(--text-inverse)
                font-medium
                transition hover:scale-[1.03]">
         Get Started
@@ -39,7 +39,7 @@
       Grow your career.
     </h2>
 
-    <p class="text-[var(--text-muted)] text-lg mb-8 max-w-lg">
+    <p class="text-(--text-muted) text-lg mb-8 max-w-lg">
       SkillSharing helps you discover the right career path, learn from others,
       and teach what you know — all in one intelligent platform.
     </p>
@@ -47,8 +47,8 @@
     <div class="flex gap-4">
       <button
         class="px-6 py-3 rounded-lg
-               bg-[var(--primary)]
-               text-[var(--text-inverse)]
+               bg-(--primary)
+               text-(--text-inverse)
                font-medium
                transition hover:scale-[1.03]"
         (click)="goToRegister()">
@@ -57,10 +57,10 @@
 
       <button
         class="px-6 py-3 rounded-lg
-               border border-[var(--border-color)]
-               text-[var(--text-main)]
+               border border-(--border-color)
+               text-(--text-main)
                font-medium
-               transition hover:bg-[var(--bg-input)]"
+               transition hover:bg-(--bg-input)"
         (click)="goToLogin()">
         Login
       </button>
@@ -71,21 +71,21 @@
 
            <div
     class="absolute inset-0 rounded-3xl
-           bg-[var(--primary)]/20
+           bg-(--primary)/20
            translate-y-6 translate-x-6
            pointer-events-none"
   ></div>
 
     <div class="relative z-10
-                bg-[var(--bg-card)]
-                border border-[var(--border-color)]
+                bg-(--bg-card)
+                border border-(--border-color)
                 rounded-2xl
                 shadow-2xl
                 p-3">
 
       <img
         src="assets/img/landingbg.jpeg"
-        class="w-145 h-96 object-cover rounded-xl" 
+        class="w-145 h-96 object-cover rounded-xl"
         alt="landingImg"/>
     </div>
 
@@ -105,7 +105,7 @@
 <app-testimonials></app-testimonials>
 
 
-  <footer class="border-t border-[var(--border-color)] py-6 text-center text-sm text-[var(--text-muted)]">
+  <footer class="border-t border-(--border-color) py-6 text-center text-sm text-(--text-muted)">
     © 2025 SkillSharing. All rights reserved.
   </footer>
 

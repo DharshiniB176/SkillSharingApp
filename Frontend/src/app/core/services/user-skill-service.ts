@@ -18,10 +18,10 @@ export class UserSkillService {
 }
 
 getUserSkills(userId: number) {
-  return this.http.get(
+  return this.http.get<any[]>(
     `http://localhost:8080/api/user-skills?userId=${userId}`
   );
 }
   }
-  
+
 

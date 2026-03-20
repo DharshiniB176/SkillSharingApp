@@ -1,22 +1,54 @@
+
 <div class="space-y-8">
 
   <div>
-    <h1 class="text-2xl font-semibold text-[var(--text-main)]">
+    <h1 class="text-2xl font-semibold text-(--text-main)]">
       Skill Matches
     </h1>
 
-    <p class="text-sm text-[var(--text-muted)]">
+    <p class="text-sm text-(--text-muted)]">
       People you can learn from
     </p>
   </div>
+
+  @if (selectedSkill) {
+
+  <div class="flex items-center justify-between
+              bg-(--bg-card)
+              border border-(--border-color)
+              rounded-xl p-4">
+
+    <div>
+      <p class="text-sm text-(--text-muted)">
+        Showing results for
+      </p>
+
+      <p class="font-semibold text-(--text-main)">
+        {{ selectedSkill }}
+      </p>
+    </div>
+
+    <button
+      (click)="clearFilter()"
+      class="text-sm px-3 py-1 rounded-lg
+             bg-(--bg-input)
+             hover:bg-(--primary)/10">
+
+      Clear
+
+    </button>
+
+  </div>
+
+}
 
   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
 
     @for (match of matches; track match.userId) {
 
       <div
-        class="bg-[var(--bg-card)]
-               border border-[var(--border-color)]
+        class="bg-(--bg-card)
+               border border-(--border-color)
                rounded-xl p-6
                shadow-sm
                hover:shadow-md
@@ -24,14 +56,14 @@
 
         <div class="flex items-center justify-between mb-3">
 
-          <h3 class="font-semibold text-[var(--text-main)]">
+          <h3 class="font-semibold text-(--text-main)">
             {{ match.userName }}
           </h3>
 
           <span
             class="text-xs px-2 py-1 rounded-full
-                   bg-[var(--bg-input)]
-                   border border-[var(--border-color)]">
+                   bg-(--bg-input)
+                   border border-(--border-color)">
 
             {{ match.level }}
 
@@ -39,20 +71,25 @@
 
         </div>
 
-        <p class="text-sm text-[var(--text-muted)] mb-4">
+        <p class="text-sm text-(--text-muted) mb-4">
           Teaches {{ match.skillName }}
         </p>
 
-        <button
-          class="w-full py-2 rounded-lg text-sm font-medium
-                 bg-[var(--primary)]
-                 text-[var(--text-inverse)]
-                 hover:bg-[var(--primary-hover)]
-                 transition">
+       <button
+  (click)="requestSession(match)"
+  [disabled]="requested.has(match.userId)"
+  class="w-full py-2 rounded-lg text-sm font-medium
+         bg-(--primary)
+         text-(--text-inverse)
+         hover:bg-(--primary-hover)
+         transition
+         disabled:opacity-50">
 
-          Request Session
+  {{ requested.has(match.userId) ? 'Requested' : 'Request Session' }}
 
-        </button>
+</button>
+
+
 
       </div>
 
@@ -61,3 +98,9 @@
   </div>
 
 </div>
+
+@if(matches.length === 0) {
+  <div class="text-center text-(--text-muted) py-10">
+    No matches found yet. Add more skills to find learning partners.
+  </div>
+}

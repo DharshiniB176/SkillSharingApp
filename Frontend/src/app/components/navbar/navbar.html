@@ -1,7 +1,7 @@
 <header
   class="h-16 flex items-center justify-between px-6
-         bg-[var(--bg-card)]
-         border-b border-[var(--border-color)]">
+         bg-(--bg-card)
+         border-b border-(--border-color)">
 
  <button
   class="relative w-10 h-10 flex items-center justify-center md:hidden"
@@ -9,7 +9,7 @@
 
   <!-- Top bar -->
   <span
-    class="absolute h-0.5 w-6 bg-[var(--text-main)]
+    class="absolute h-0.5 w-6 bg-(--text-main)
            transition-all duration-300"
     [class.translate-y-[-6px]]="!sidebarOpen"
     [class.rotate-45]="sidebarOpen">
@@ -17,14 +17,14 @@
 
   <!-- Middle bar -->
   <span
-    class="absolute h-0.5 w-6 bg-[var(--text-main)]
+    class="absolute h-0.5 w-6 bg-(--text-main)
            transition-all duration-300"
     [class.opacity-0]="sidebarOpen">
   </span>
 
   <!-- Bottom bar -->
   <span
-    class="absolute h-0.5 w-6 bg-[var(--text-main)]
+    class="absolute h-0.5 w-6 bg-(--text-main)
            transition-all duration-300"
     [class.translate-y-[6px]]="!sidebarOpen"
     [class.-rotate-45]="sidebarOpen">
@@ -36,18 +36,18 @@
   <div class="ml-auto flex items-center gap-4">
       <button
     (click)="theme.toggleTheme()"
-    class="mt-4 px-4 py-2 border border-border"
+    class="px-4 py-2 "
   >
     {{ theme.isDarkMode() ? '🌙 Dark' : '🌞 Light' }}
   </button>
-    <span class="hidden sm:block text-sm text-[var(--text-muted)]">
+    <span class="hidden sm:block text-sm text-(--text-muted)">
       {{ auth.user()?.fullName }}
     </span>
 
     <button
       class="px-4 py-2 rounded-lg
-             bg-[var(--primary)]
-             text-[var(--text-inverse)]
+             bg-(--primary)
+             text-(--text-inverse)
              text-sm"
              (click)="logout()">
       Logout

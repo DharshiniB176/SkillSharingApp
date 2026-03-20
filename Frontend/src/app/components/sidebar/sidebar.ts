@@ -3,7 +3,7 @@ import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-sidebar',
-  imports: [RouterLink],
+  imports: [],
   templateUrl: './sidebar.html',
   styleUrl: './sidebar.scss',
 })
@@ -23,5 +23,43 @@ export class Sidebar {
       this.close.emit();
     }
   }
+
+  menu = [
+  {
+    label: 'Dashboard',
+    icon: 'pi pi-home',
+    route: '/dashboard'
+  },
+  {
+    label: 'Career',
+    icon: 'pi pi-briefcase',
+    route: '/dashboard/carrer'
+  },
+  {
+    label: 'Skills',
+    icon: 'pi pi-star',
+    route: '/dashboard/my-skills'
+  },
+  {
+    label: 'Matches',
+    icon: 'pi pi-user-plus',
+    route: '/dashboard/matches'
+  },
+  {
+    label: 'Incoming Requests',
+    icon: 'pi pi-envelope',
+    route: '/dashboard/incoming-requests'
+  },
+  {
+  label: 'My Requests',
+  icon: 'pi pi-send',
+  route: '/dashboard/my-requests'
+},
+{
+  label: 'Interests',
+  icon: 'pi pi-heart',
+  route: '/dashboard/interest'
+}
+];
 
 }

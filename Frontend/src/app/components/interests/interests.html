@@ -1,0 +1,56 @@
+<div class="space-y-8">
+
+  <div>
+    <h1 class="text-2xl font-semibold text-(--text-main)">
+      Select Your Interests
+    </h1>
+
+    <p class="text-sm text-(--text-muted)">
+      Choose areas you are interested in to get personalized career suggestions
+    </p>
+  </div>
+
+  <!-- INTEREST GRID -->
+  <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+
+    @for (item of interests; track item) {
+
+      <div
+        (click)="toggleInterest(item)"
+        class="cursor-pointer
+               px-4 py-3 rounded-xl text-center
+               border border-(--border-color)
+               transition
+               hover:shadow-md"
+        [ngClass]="
+          selected.has(item)
+          ? 'bg-(--primary) text-(--text-inverse)'
+          : 'bg-(--bg-card) text-(--text-main)'
+        ">
+
+        {{ item }}
+
+      </div>
+
+    }
+
+  </div>
+
+  <!-- SAVE BUTTON -->
+  <div class="flex justify-end">
+
+    <button
+      (click)="save()"
+      class="px-6 py-2 rounded-lg
+             bg-(--primary)
+             text-(--text-inverse)
+             hover:bg-(--primary-hover)
+             transition">
+
+      Save Interests
+
+    </button>
+
+  </div>
+
+</div>
