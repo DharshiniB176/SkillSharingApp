@@ -1,0 +1,39 @@
+<p-dialog
+  [(visible)]="visible"
+  [modal]="true"
+  header="Add Course"
+  [style]="{ width: '450px' }">
+
+  <div class="space-y-4">
+
+    <input [(ngModel)]="title" placeholder="Title"
+           class="w-full p-2 border border-(--border-color) rounded" />
+
+    <textarea [(ngModel)]="description"
+              placeholder="Description"
+              class="w-full p-2 border border-(--border-color) rounded">
+    </textarea>
+
+    <input [(ngModel)]="category" placeholder="Category"
+           class="w-full p-2 border border-(--border-color) rounded" />
+
+    <input [(ngModel)]="level" placeholder="Level"
+           class="w-full p-2 border border-(--border-color) rounded" />
+
+    <input [(ngModel)]="duration" placeholder="Duration"
+           class="w-full p-2 border border-(--border-color) rounded" />
+
+    <input [(ngModel)]="thumbnailUrl" placeholder="Image URL"
+           class="w-full p-2 border border-(--border-color) rounded" />
+
+    <input [(ngModel)]="videoUrl" placeholder="Video Url"
+     class="w-full p-2 border border-(--border-color) rounded" />
+
+    <div class="flex justify-end gap-3">
+      <button (click)="close()" class="border p-2">Cancel</button>
+      <button (click)="save()" class="border p-2">Save</button>
+    </div>
+
+  </div>
+
+</p-dialog>

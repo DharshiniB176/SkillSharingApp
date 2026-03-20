@@ -13,6 +13,8 @@ import { MyRequests } from './components/my-requests/my-requests';
 import { VideoCall } from './components/video-call/video-call';
 import { Interests } from './components/interests/interests';
 import { Carrer } from './components/carrer/carrer';
+import { Courses } from './components/courses/courses';
+import { CourseDetails } from './components/courses/course-details/course-details';
 
 export const routes: Routes = [
   { path: '', component: Landing },
@@ -30,6 +32,8 @@ export const routes: Routes = [
     { path: 'call/:room', component: VideoCall },
     { path: 'interest', component: Interests},
     { path: 'carrer', component: Carrer },
+    { path: 'course', component: Courses},
+    { path: 'courses/:id', component: CourseDetails},
 
   ]
 },

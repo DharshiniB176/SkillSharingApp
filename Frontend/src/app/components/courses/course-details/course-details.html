@@ -1,0 +1,82 @@
+
+  <div class="space-y-8">
+
+    <div class="flex items-center justify-between">
+
+  <!-- BACK BUTTON -->
+  <button
+    (click)="goBack()"
+    class="flex items-center gap-2
+           px-3 py-2 rounded-lg text-sm
+           bg-(--bg-input)
+           hover:bg-(--primary)/10
+           text-(--text-main)">
+
+    <i class="pi pi-arrow-left"></i>
+    Back
+
+  </button>
+
+</div>
+
+  <div class="bg-(--bg-card)
+              border border-(--border-color)
+              rounded-2xl p-4">
+
+    <iframe
+      [src]="videoUrl"
+      class="w-full h-64 md:h-96 rounded-xl"
+      frameborder="0"
+      allowfullscreen>
+    </iframe>
+
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+
+    <div class="md:col-span-2 space-y-4">
+
+      <h1 class="text-2xl font-semibold text-(--text-main)">
+        {{ course?.title }}
+      </h1>
+
+      <p class="text-sm text-(--text-muted)">
+        {{ course?.description }}
+      </p>
+
+      <p class="text-sm text-(--text-muted)">
+        By {{ course?.author?.fullName }}
+      </p>
+
+    </div>
+
+    <div class="bg-(--bg-card)
+                border border-(--border-color)
+                rounded-xl p-4 space-y-4">
+
+      <div class="flex justify-between text-sm">
+        <span>Level</span>
+        <span>{{ course?.level }}</span>
+      </div>
+
+      <div class="flex justify-between text-sm">
+        <span>Duration</span>
+        <span>{{ course?.duration }}</span>
+      </div>
+
+      <button
+        class="w-full py-2 rounded-lg
+               bg-(--primary)
+               text-(--text-inverse)
+               hover:bg-(--primary-hover)">
+
+        Start Learning
+
+      </button>
+
+    </div>
+
+  </div>
+
+</div>

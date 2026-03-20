@@ -59,6 +59,11 @@ export class Sidebar {
   label: 'Interests',
   icon: 'pi pi-heart',
   route: '/dashboard/interest'
+},
+{
+  label: 'Courses',
+  icon: 'pi pi-book',
+  route: '/dashboard/course'
 }
 ];
 
