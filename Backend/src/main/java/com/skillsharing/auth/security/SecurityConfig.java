@@ -72,11 +72,6 @@ public class SecurityConfig {
                         )
                         .successHandler(oAuth2SuccessHandler)
                 )
-                .oauth2Login(oauth -> oauth
-                        .authorizationEndpoint(auth -> auth
-                                .baseUri("/oauth2/authorize")
-                        )
-                )
 
                 .addFilterBefore(
                         jwtAuthenticationFilter,

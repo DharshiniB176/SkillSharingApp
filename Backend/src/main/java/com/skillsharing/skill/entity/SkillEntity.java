@@ -17,6 +17,10 @@ public class SkillEntity {
 
     private String description;
 
+    public SkillEntity() {
+
+    }
+
     public Long getId() {
         return id;
     }
@@ -48,4 +52,7 @@ public class SkillEntity {
     public void setDescription(String description) {
         this.description = description;
     }
+
+
+    public SkillEntity(Long id, String name, String category, String description){}
 }
