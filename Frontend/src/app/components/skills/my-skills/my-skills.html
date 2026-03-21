@@ -1,6 +1,5 @@
     <div class="space-y-8">
 
-    <!-- PAGE HEADER -->
     <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
 
         <div>
@@ -26,7 +25,6 @@
 
     </div>
 
-    <!-- SKILL GROUPS -->
 
     <div class="space-y-8">
 
@@ -34,17 +32,15 @@
 
         <div>
 
-            <!-- CATEGORY TITLE -->
 
             <h2 class="text-lg font-semibold text-[var(--text-main)] mb-4">
             {{ group.category }}
             </h2>
 
-            <!-- SKILLS GRID -->
 
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
 
-            @for (skill of group.items; track skill.name) {
+            @for (skill of group.items; track skill.id) {
 
                 <div
                 class="bg-[var(--bg-card)]
@@ -53,8 +49,6 @@
                         shadow-sm
                         hover:shadow-md
                         transition">
-
-                <!-- SKILL HEADER -->
 
                 <div class="flex items-center justify-between mb-3">
 
@@ -74,7 +68,6 @@
 
                 </div>
 
-                <!-- TYPE BADGE -->
 
                 <span
                     class="text-xs px-3 py-1 rounded-full font-medium"

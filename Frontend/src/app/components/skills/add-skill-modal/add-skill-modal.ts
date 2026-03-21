@@ -23,7 +23,7 @@ export class AddSkillModal implements OnInit{
   selectedSkill: number | null = null;
   selectedType: string | null = null;
   selectedLevel: string | null = null;
-  
+
 
 
   constructor(

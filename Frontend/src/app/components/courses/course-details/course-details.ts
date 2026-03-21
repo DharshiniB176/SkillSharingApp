@@ -49,7 +49,7 @@ export class CourseDetails {
 }
 
 goBack(){
-  this.router.navigate(['/dashboard/courses']);
+  this.router.navigate(['/dashboard/course']);
 }
 
 }

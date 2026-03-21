@@ -8,3 +8,22 @@
   background-color: var(--bg-input) !important;
   color: var(--text-main) !important;
 }
+
+
+.scrolltop-btn {
+  background-color: var(--primary);
+  color: var(--text-inverse);
+  border-radius: 9999px;
+  width: 3rem;
+  height: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.scrolltop-btn:hover {
+  background-color: var(--primary-hover);
+  transform: scale(1.05);
+}

@@ -63,6 +63,7 @@ groupSkillsByCategory(data: any[]) {
     }
 
     map[category].push({
+      id: skill.id,
       name: skill.skill.name,
       type: skill.type,
       level: skill.level
