@@ -100,23 +100,31 @@
 
   <button
     type="button"
+    pTooltip="Coming soon"
+    tooltipPosition="top"
     class="w-14 h-14 flex items-center justify-center
            bg-[var(--bg-input)]
            border border-[var(--border-color)]
            rounded-xl
-           transition hover:scale-105"
+           transition hover:scale-105
+           cursor-not-allowed"
+  [disabled]="true"
     (click)="loginWithFacebook()">
     <img src="assets/icons/facebook.png" class="w-6 h-6" />
   </button>
 
   <button
     type="button"
+    pTooltip="Coming soon"
+    tooltipPosition="top"
     class="w-14 h-14 flex items-center justify-center
            bg-[var(--bg-input)]
            border border-[var(--border-color)]
            rounded-xl
-           transition hover:scale-105"
-    (click)="loginWithLinkedIn()">
+           transition hover:scale-105
+           cursor-not-allowed"
+    (click)="loginWithLinkedIn()"
+    [disabled]="true">
     <img src="assets/icons/linkedin.png" class="w-6 h-6" />
   </button>
 

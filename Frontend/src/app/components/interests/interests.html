@@ -22,11 +22,11 @@
                border border-(--border-color)
                transition
                hover:shadow-md"
-        [ngClass]="
-          selected.has(item)
-          ? 'bg-(--primary) text-(--text-inverse)'
-          : 'bg-(--bg-card) text-(--text-main)'
-        ">
+       [ngClass]="
+  selected.has(item)
+  ? 'bg-(--primary) text-(--text-inverse) border-(--primary)'
+  : 'bg-(--bg-card) text-(--text-main)'
+">
 
         {{ item }}
 

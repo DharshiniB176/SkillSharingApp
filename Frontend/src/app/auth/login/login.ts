@@ -6,6 +6,7 @@ import { PasswordModule } from 'primeng/password';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../core/services/auth-service';
 import { Router } from '@angular/router';
+import { TooltipModule } from 'primeng/tooltip';
 
 interface LoginRequest {
   email: string;
@@ -14,12 +15,12 @@ interface LoginRequest {
 
 @Component({
   selector: 'app-login',
-  imports: [ReactiveFormsModule,ButtonModule,InputTextModule,PasswordModule,CommonModule],
+  imports: [ReactiveFormsModule,ButtonModule,InputTextModule,PasswordModule,CommonModule, TooltipModule],
   templateUrl: './login.html',
   styleUrl: './login.scss',
 })
 export class Login {
-  
+
   private fb = inject(FormBuilder);
 
   constructor(private auth:AuthService, private router: Router){}

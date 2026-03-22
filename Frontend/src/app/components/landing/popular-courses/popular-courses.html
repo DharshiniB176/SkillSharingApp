@@ -81,12 +81,12 @@
 
             <div class="flex items-center gap-2">
               <span class="font-semibold text-lg text-[var(--text-main)]">
-                ${{ course.price }}
+                Rs. {{ course.price }}
               </span>
 
               @if (course.oldPrice) {
                 <span class="text-xs line-through text-[var(--text-muted)]">
-                  ${{ course.oldPrice }}
+                  Rs. {{ course.oldPrice }}
                 </span>
               }
             </div>

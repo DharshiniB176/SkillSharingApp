@@ -1,5 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
+import { AuthService } from '../../core/services/auth-service';
+import { InterestService } from '../../core/services/interest-service';
 
 @Component({
   selector: 'app-interests',
@@ -10,7 +12,26 @@ import { Component } from '@angular/core';
 })
 export class Interests {
 
+  constructor(private auth: AuthService,private interestService: InterestService){}
 
+ ngOnInit() {
+  this.loadInterests();
+}
+
+loadInterests() {
+
+  const userId = this.auth.user()?.id;
+
+  if (!userId) return;
+
+  this.interestService.getInterests(userId)
+    .subscribe((data: any[]) => {
+
+      this.selected = new Set(data.map(i => i.interest));
+
+    });
+
+}
   interests = [
     'Technology',
     'Design',
@@ -34,11 +55,19 @@ export class Interests {
 
   }
 
-  save() {
+save() {
 
-    console.log([...this.selected]);
+  const userId = this.auth.user()?.id;
 
-  }
+  if(!userId) return;
 
+ const selectedInterests = Array.from(this.selected)
+
+  this.interestService.saveInterests(userId,selectedInterests)
+    .subscribe(() => {
+      console.log('Saved');
+    });
+
+}
 }
 

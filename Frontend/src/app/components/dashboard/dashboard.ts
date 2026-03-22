@@ -2,18 +2,26 @@ import { Component, inject, OnInit } from '@angular/core';
 import { AuthService } from '../../core/services/auth-service';
 import { DatePicker } from 'primeng/datepicker';
 import { FormsModule } from '@angular/forms';
+import { InterestService } from '../../core/services/interest-service';
+import { CommonModule } from '@angular/common';
 
 
 @Component({
   selector: 'app-dashboard',
-  imports: [DatePicker, FormsModule],
+  imports: [DatePicker, FormsModule, CommonModule],
   templateUrl: './dashboard.html',
   styleUrls: ['./dashboard.scss'],
   standalone: true
 })
 export class Dashboard {
 
-  auth = inject(AuthService);
+
+  interests: string[] = [];
+
+  constructor(
+  private interestService: InterestService,
+  public auth: AuthService
+) {}
 
    // Overall progress %
   overallProgress = 68;
@@ -30,11 +38,28 @@ export class Dashboard {
   streak = 15;
   activeDays = 14;
   progress = 50;
-  careerInsight ={
-        name: 'Frontend Developer',
-        progress: 80,
-        missingSkills: ['Node.js']
-      }
+
+  careerInsights = [
+  {
+    name: 'Frontend Developer',
+    progress: 80,
+    missingSkills: ['Node.js'],
+    color: 'bg-blue-500'
+  },
+  {
+    name: 'Backend Developer',
+    progress: 60,
+    missingSkills: ['Spring Boot'],
+    color: 'bg-green-500'
+  },
+  {
+    name: 'Full Stack Developer',
+    progress: 50,
+    missingSkills: ['Docker', 'System Design'],
+    color: 'bg-purple-500'
+  }
+];
+
 
       allCareers = [
   {
@@ -50,10 +75,10 @@ export class Dashboard {
 userSkills = ['HTML', 'CSS', 'Angular'];
 
 
-calculateCareerInsight() {
 
-  let bestCareer: any = null;
-  let maxMatch = 0;
+calculateCareerInsights() {
+
+  const results: any[] = [];
 
   this.allCareers.forEach(career => {
 
@@ -65,27 +90,47 @@ calculateCareerInsight() {
       (matchedSkills.length / career.skills.length) * 100
     );
 
-    if (progress > maxMatch) {
-
-      maxMatch = progress;
-
-      bestCareer = {
-        name: career.name,
-        progress: progress,
-        missingSkills: career.skills.filter(
-          skill => !this.userSkills.includes(skill)
-        )
-      };
-
-    }
+    results.push({
+      name: career.name,
+      progress: progress,
+      missingSkills: career.skills.filter(
+        skill => !this.userSkills.includes(skill)
+      ),
+      color: this.getColor(progress)
+    });
 
   });
 
-  this.careerInsight = bestCareer;
+  this.careerInsights = results.sort((a, b) => b.progress - a.progress);
 
 }
+
+getColor(progress: number): string {
+
+  if (progress >= 75) return 'bg-green-500';
+  if (progress >= 50) return 'bg-yellow-500';
+  return 'bg-red-500';
+
+}
+
 ngOnInit() {
-  this.calculateCareerInsight();
+  this.calculateCareerInsights();
+  this.loadInterests();
+}
+
+loadInterests() {
+
+  const userId = this.auth.user()?.id;
+
+  if (!userId) return;
+
+  this.interestService.getInterests(userId)
+    .subscribe((data: any[]) => {
+
+      this.interests = data.map(i => i.interest);
+
+    });
+
 }
 }
 

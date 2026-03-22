@@ -74,57 +74,89 @@
 
   </div>
 
+  <!-- CAREER INSIGHTS -->
+<div class="bg-(--bg-card)
+            border border-(--border-color)
+            rounded-2xl p-6">
 
-  <!-- 2️⃣ CAREER INSIGHT -->
-  <div class="bg-(--bg-card)
-              border border-(--border-color)
-              rounded-2xl p-6">
+  <h3 class="font-medium mb-6 text-(--text-main)">
+    Career Insights
+  </h3>
 
-    <h3 class="font-medium mb-4">
-      Career Insight
-    </h3>
+  <div class="space-y-5">
 
-    <p class="text-sm text-(--text-muted)">
-      You are close to becoming
-    </p>
+    @for (career of careerInsights; track career.name) {
 
-    <p class="text-lg font-semibold mt-1">
-      {{ careerInsight.name }}
-    </p>
+      <div class="p-4 rounded-xl border border-(--border-color)
+                  bg-(--bg-input) space-y-3">
 
-    <!-- Progress Bar -->
-    <div class="h-3 rounded-full bg-(--bg-input) overflow-hidden mt-3">
+        <!-- HEADER -->
+        <div class="flex items-center justify-between">
 
-      <div
-        class="h-full bg-(--primary)"
-        [style.width.%]="careerInsight.progress">
+          <div>
+            <p class="text-xs text-(--text-muted)">
+              Recommended Role
+            </p>
+
+            <p class="text-lg font-semibold text-(--text-main)">
+              {{ career.name }}
+            </p>
+          </div>
+
+          <!-- PROGRESS BADGE -->
+          <span
+            class="text-xs px-3 py-1 rounded-full
+                   bg-(--primary)/10 text-(--primary)">
+
+            {{ career.progress }}%
+
+          </span>
+
+        </div>
+
+        <!-- PROGRESS BAR -->
+        <div class="h-2 rounded-full bg-(--bg-card) overflow-hidden">
+
+          <div
+            class="h-full rounded-full transition-all duration-500"
+            [style.width.%]="career.progress"
+            [ngClass]="career.color">
+          </div>
+
+        </div>
+
+        <!-- MISSING SKILLS -->
+        <div>
+
+          <p class="text-xs text-(--text-muted) mb-2">
+            Missing Skills
+          </p>
+
+          <div class="flex flex-wrap gap-2">
+
+            @for (skill of career.missingSkills; track skill) {
+
+              <span
+                class="px-2 py-1 rounded-full text-xs
+                       bg-red-100 text-red-700">
+
+                {{ skill }}
+
+              </span>
+
+            }
+
+          </div>
+
+        </div>
+
       </div>
 
-    </div>
-
-    <p class="text-sm text-(--text-muted) mt-2">
-      {{ careerInsight.progress }}% completed
-    </p>
-
-    <!-- Missing Skills -->
-    <div class="flex flex-wrap gap-2 mt-4">
-
-      @for (skill of careerInsight.missingSkills; track skill) {
-
-        <span
-          class="px-3 py-1 rounded-full text-xs
-                 bg-red-100 text-red-700">
-
-          {{ skill }}
-
-        </span>
-
-      }
-
-    </div>
+    }
 
   </div>
 
+</div>
 
   <!-- 3️⃣ CALENDAR -->
   <div class="bg-(--bg-card)
@@ -163,6 +195,40 @@
       </div>
 
     </div>
+
+  </div>
+
+</div>
+
+
+<!-- INTERESTS -->
+<div class="bg-(--bg-card) border border-(--border-color)
+            rounded-2xl p-6 text-(--text-main)">
+
+  <h3 class="font-medium mb-6">
+    My Interests
+  </h3>
+
+  <div class="flex flex-wrap gap-2">
+
+    @if (!interests.length) {
+  <p class="text-sm text-(--text-muted)">
+    No interests selected yet
+  </p>
+}
+    @for (item of interests; track item) {
+
+      <span
+        class="px-3 py-1.5 rounded-full text-sm
+               bg-(--primary)/10
+               text-(--primary)
+               border border-(--primary)/20">
+
+        {{ item }}
+
+      </span>
+
+    }
 
   </div>
 
