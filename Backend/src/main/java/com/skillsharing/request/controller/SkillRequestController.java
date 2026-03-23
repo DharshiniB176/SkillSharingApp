@@ -4,6 +4,8 @@ import com.skillsharing.request.dto.SkillRequestDTO;
 import com.skillsharing.request.entity.RequestStatus;
 import com.skillsharing.request.entity.SkillRequestEntity;
 import com.skillsharing.request.service.SkillRequestService;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,11 +20,19 @@ public class SkillRequestController {
         this.requestService = requestService;
     }
 
+//    @PostMapping
+//    public SkillRequestEntity createRequest(
+//            @RequestParam Long userId,
+//            @RequestBody SkillRequestDTO dto) {
+//
+//        return requestService.createRequest(userId, dto);
+//    }
+
+
     @PostMapping
     public SkillRequestEntity createRequest(
-            @RequestParam Long userId,
-            @RequestBody SkillRequestDTO dto) {
-
+            @RequestParam @NotNull Long userId,
+            @Valid @RequestBody SkillRequestDTO dto) {
         return requestService.createRequest(userId, dto);
     }
     @GetMapping("/incoming")

@@ -1,8 +1,13 @@
 package com.skillsharing.request.dto;
 
+import jakarta.validation.constraints.NotNull;
+
 public class SkillRequestDTO {
 
+    @NotNull
     private Long teacherId;
+
+    @NotNull
     private Long skillId;
 
     public Long getTeacherId() {
