@@ -32,17 +32,39 @@ loadInterests() {
     });
 
 }
-  interests = [
-    'Technology',
-    'Design',
-    'Business',
-    'AI',
-    'Healthcare',
-    'Finance',
-    'Marketing',
-    'Data Science'
-  ];
+  // interests = [
+  //   'Technology',
+  //   'Design',
+  //   'Business',
+  //   'AI',
+  //   'Healthcare',
+  //   'Finance',
+  //   'Marketing',
+  //   'Data Science'
+  // ];
 
+  interests = [
+  'Technology',
+  'Design',
+  'Business',
+  'AI',
+  'Healthcare',
+  'Finance',
+  'Marketing',
+  'Data Science',
+  'Education',
+  'Entrepreneurship',
+  'Cybersecurity',
+  'Blockchain',
+  'Cloud Computing',
+  'Sustainability',
+  'Psychology',
+  'Art & Culture',
+  'Music',
+  'Sports',
+  'Travel',
+  'Food & Culinary'
+];
   selected: Set<string> = new Set();
 
   toggleInterest(item: string) {

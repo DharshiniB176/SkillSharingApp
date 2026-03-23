@@ -82,24 +82,27 @@ loadMatchesBySkill(skillName: string) {
 
 requested: Set<number> = new Set();
 
+
 requestSession(match: any) {
+  console.log("MATCHHHHHHHH:", match);
 
   const userId = this.auth.user()?.id;
-
   if (!userId) return;
 
   const payload = {
-    teacherId: match.userId,
+    teacherId: match.teacherId,
     skillId: match.skillId
   };
 
   this.requestService.sendRequest(userId, payload)
-    .subscribe(() => {
-
-      this.requested.add(match.userId);
-
+    .subscribe({
+      next: () => {
+        this.requested.add(match.userId);
+      },
+      error: (err) => {
+        console.error('Error creating request:', err);
+      }
     });
-
 }
 
 clearFilter() {
