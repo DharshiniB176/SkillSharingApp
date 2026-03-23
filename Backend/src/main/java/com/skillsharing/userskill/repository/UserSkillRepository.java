@@ -10,11 +10,11 @@ import java.util.List;
 
 @Repository
 public interface UserSkillRepository extends JpaRepository<UserSkillEntity, Long> {
-
     @Query("""
 SELECT new com.skillsharing.match.dto.SkillMatchDTO(
-    u.id,
+    u.id,        
     u.fullName,
+    s.id,        
     s.name,
     us.level
 )
@@ -28,6 +28,7 @@ AND s.id IN (
     WHERE us2.user.id = :userId
     AND us2.type = 'LEARN'
 )
+AND u.id != :userId
 """)
     List<SkillMatchDTO> findSkillMatches(Long userId);
     List<UserSkillEntity> findByUserId(Long userId);
